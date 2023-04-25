@@ -3,6 +3,7 @@ from .models import Skill
 # Create your views here.
 
 def get_skill_set(request):
+    # this is a sample view
     skills = Skill.objects.all()
     return render(request, 'hub/our_skills.html', {'skills': skills})
 

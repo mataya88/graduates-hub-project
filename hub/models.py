@@ -105,7 +105,7 @@ class Occupancy(models.Model):
     day = models.CharField(max_length=3, choices=WEEK_DAYS)
 
     def __str__(self):
-        return (self.day + ': ' + str(self.start_time) 
+        return (self.day + ': ' + str(self.start_time)
                 + ' --> ' + str(self.end_time))
 
 
