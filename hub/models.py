@@ -10,6 +10,10 @@ class Semester(models.Model):
     year = models.PositiveIntegerField()
     term = models.CharField(max_length=2, choices=TERMS_CHOICES)
 
+    def __str__(self):
+        sem_year = str(self.year)[-2:] + '/' + str(self.year+1)[-2:]
+        return self.term + ' ' + sem_year
+
 
 class User(models.Model):
     GENDERS = [('M', 'Male'), ('F', 'Female')]
@@ -17,9 +21,12 @@ class User(models.Model):
     name = models.CharField(max_length=40)
     phone = models.PositiveIntegerField()
     bio = models.TextField(max_length=500)
-    photo = models.ImageField(null=True)
-    website = models.URLField(null=True)
+    photo = models.ImageField(null=True, blank=True)
+    website = models.URLField(null=True, blank=True)
     email = models.EmailField()
+
+    def __str__(self):
+        return self.name
 
 
 class Notification(models.Model):
@@ -52,12 +59,13 @@ class Student(User):
     gender = models.CharField(max_length=1, choices=User.GENDERS)
     year = models.PositiveIntegerField()
     personality = models.CharField(max_length=4, choices=PERSONALITIES)
-    team = models.ForeignKey(Team, null=True, on_delete=models.SET_NULL)
+    team = models.ForeignKey(
+        Team, null=True, on_delete=models.SET_NULL, blank=True)
     design_semester = models.ForeignKey(
-        Semester, null=True, on_delete=models.SET_NULL)
+        Semester, null=True, on_delete=models.SET_NULL, blank=True)
     skills = models.ManyToManyField(
         'Skill')
-    occupancies = models.ManyToManyField('Occupancy')
+    occupancies = models.ManyToManyField('Occupancy', blank=True)
 
 
 class Graduate(User):
@@ -72,7 +80,7 @@ class Company(User):
 
 
 class Skill(models.Model):
-    FIELDS = [('Embedded Systesm', 'Embedded Systems'),
+    FIELDS = [('Embedded Systems', 'Embedded Systems'),
               ('App Development', 'App Development'),
               ('Programming Language', 'Programming Language'),
               ('Graphic Design', 'Graphics Design'),
@@ -81,8 +89,11 @@ class Skill(models.Model):
               ('Web Backend', 'Web Backend'),
               ('Web Frontend', 'Web Frontend')]
 
-    field = models.CharField(max_length=40)
+    field = models.CharField(max_length=40, choices=FIELDS)
     name = models.CharField(max_length=40)
+
+    def __str__(self):
+        return self.field + ' - ' + self.name
 
 
 class Occupancy(models.Model):
@@ -93,6 +104,10 @@ class Occupancy(models.Model):
     end_time = models.TimeField()
     day = models.CharField(max_length=3, choices=WEEK_DAYS)
 
+    def __str__(self):
+        return (self.day + ': ' + str(self.start_time) 
+                + ' --> ' + str(self.end_time))
+
 
 class Post(models.Model):
     VISIBILITY_OPTIONS = [('Pub', 'Public'), ('Pri', 'Private')]
@@ -102,7 +117,7 @@ class Post(models.Model):
     time = models.DateTimeField(auto_now_add=True)
     visibility = models.CharField(max_length=3, choices=VISIBILITY_OPTIONS)
     links = models.TextField()
-    post_type = models.CharField(max_length=3)
+    post_type = models.CharField(max_length=3, choices=POST_TYPES)
     creator = models.ForeignKey(User, on_delete=models.CASCADE, null=False)
 
 
