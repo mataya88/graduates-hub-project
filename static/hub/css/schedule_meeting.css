@@ -95,24 +95,54 @@ header {
 }
 
 .meetings .meeting h5{
+    font-size: 13px;
     margin-bottom: 0px;
     margin-top: 7px;
     margin-left: 5px;
 }
 
+.meetings .meeting .desc_container{
+    max-width:300px;
+    max-height: 40px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+
+}
 .meetings .meeting h6{
     margin-top: 15px;
     margin-bottom: 10px;
     margin-left: 5px;
     color: grey;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+    white-space: normal;
+    overflow: hidden;
 }
 
 .meetings .meeting hr{
-    width: auto;
+    width: auto;    
     border-style: solid;
     border-width: 1px;
     border-color: grey;
 }
+
+.available-list {
+    margin-left: 15px;
+    margin-top: 0px;
+    display: flex;
+    list-style: none;
+    padding: 0;
+  }
+  
+  .available-list li {
+    font-size: 13px;
+    margin-right: 10px;
+    margin-top: 0px;
+    margin-left: 5px;
+  }
 
 
 

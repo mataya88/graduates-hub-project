@@ -19,16 +19,18 @@ def get_schedule_meeting_page(request):
         {"name": "John Doe", "picture": "/profile_pics/profile2.png"}
     ]
 
-    team_members = Student.objects.all()
-    """team_members = []
-    for member in members:
-        print(member)
-        print(member.photo.url)
-        team_members.append({"name": member.name, "picture": member.photo.url})
-        """
+    team = Team.objects.get(name="Bugs-Slayerz")
+    team_members = Student.objects.filter(team=team)
+   
+    meetingsObj = Meeting.objects.filter(team=team)
 
+    meetings = []
+    for meeting in meetingsObj:
+        meetings.append({"title": meeting.title, "description": meeting.description, "date": meeting.date,
+        "start_time": meeting.start_time.strftime('%I:%M %p'), "end_time": meeting.end_time.strftime('%I:%M %p'), 
+        "members_available": meeting.members_available})
 
-    context = {"team_members": team_members}
+    context = {"team_members": team_members, "meetings": meetings}
  
     return render(request, 'hub/schedule_meeting.html', context)
 

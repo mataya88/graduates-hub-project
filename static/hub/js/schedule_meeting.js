@@ -131,7 +131,7 @@
           
                 // Show or hide the icon based on the occupancy status
                 if (isOccupied) {
-                    
+
                   icon.style.display = 'none';
                 } else {
                   icon.style.display = 'block';
@@ -162,4 +162,20 @@ members.forEach(member => {
 const name = member.querySelector('h4').textContent;
 const initials = name.split(' ').map(word => word.charAt(0)).join('');
 member.querySelector('h4').textContent = initials;
+});
+
+const available_members = document.querySelectorAll('.available-list');
+available_members.forEach(list => {
+// Select all the li elements in the available-list
+const listItems = list.querySelectorAll('.available-list li');
+    
+// Loop through each li element
+listItems.forEach((item) => {
+    // Split the name into words
+    const words = item.textContent.trim().split(' ');
+    // Get the first letter of each word and combine them
+    const initials = words.map((word) => word.charAt(0)).join('');
+    // Set the content of the li element to the initials
+    item.textContent = initials;
+});
 });

@@ -141,4 +141,5 @@ class Meeting(models.Model):
     end_time = models.TimeField()
     date = models.DateField()
     team = models.ForeignKey(Team, on_delete=models.CASCADE, null=False)
-    creator = models.ForeignKey(Student, on_delete=models.SET_NULL, null=True)
+    creator = models.ForeignKey(Student, on_delete=models.SET_NULL, null=True, related_name='meetings_created')
+    members_available = models.ManyToManyField('Student', blank=True, related_name='meetings_available')
