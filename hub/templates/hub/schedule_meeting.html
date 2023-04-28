@@ -1,0 +1,252 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Graduates Hub</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'hub/css/schedule_meeting.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+
+</head>
+<body>
+	<header>
+		<div class="logo">
+			<img src="{% static 'hub/img/GraduatesHubLogo.png' %}" alt="Graduates Hub Logo">
+            <img src="{% static 'hub/img/GraduatesHubLogo.png' %}">
+		</div>
+		<div class="title">
+			<h1>Graduates Hub</h1>
+			<p>Where career dreams come true</p>
+		</div>
+	</header>
+    <div class = "bar">
+        <h2>Schedule a Meeting</h2>	
+    </div>
+    <div class="content">
+        <div class="sideinfo">
+            <div class="team">
+                <h2>Team Members</h2>
+                <!--
+                <div class="members">
+                    <div class="member">
+                        <i class="fa fa-user" style="font-size:48px;color:black"></i>
+                        <h4>DM</h4>
+                
+                    </div>
+                    <div class="member">
+                        <i class="fa fa-user" style="font-size:48px;color:black"></i>
+                        <h4>MA</h4>
+            
+                    </div>
+                    <div class="member">
+                        <i class="fa fa-user" style="font-size:48px;color:black"></i>
+                        <h4>LC</h4>
+            
+                    </div>
+                    <div class="member">
+                        <i class="fa fa-user" style="font-size:48px;color:black"></i>
+                        <h4>JS  </h4>
+            
+                    </div>
+                -->
+                <div class="members">
+                    {% for tmember in team_members %}
+                    <div class="member">
+                      <img src="{% static 'hub/img/Profile_photo.png' %}" alt="{{ tmember.name }}">
+                      <h4>{{ tmember.name }}</h4>
+                    </div>
+                    {% endfor %}
+                  
+                  
+                </div>
+
+                <div class="meetings">
+                    <h2>Scheduled Meetings</h2>
+
+                    {% for meeting in meetings %}
+                    <div class="meeting">
+                        <h5 class="title">{{meeting.title}}</h5>
+                        <div class="desc_container">
+                            <h6 class="description">{{meeting.description}}</h6>
+                        </div>
+                        <hr>
+                        <h5 class="date">{{meeting.date}}</h5>
+                        <h5 class="time">{{meeting.start_time}} to {{meeting.end_time}} </h5>
+                        <h6>Members Available:</h6>
+                        <ul class="available-list">
+                            {% for student in meeting.members_available.all %}
+                                <li>{{ student.name }}</li>
+                            {% endfor %}
+                            </ul>
+
+                    </div>
+
+                    {% endfor %}
+
+        
+                </div>
+            </div>
+            
+            
+
+        </div>
+        <div class="schedule_container">
+            <div class="top_bar">
+                <h3>Select meeting day</h3>
+                <div class="create_btn">
+                    <button>Create Meeting</button>
+                </div>
+            </div>
+
+            <div class="select_day">
+                <ion-icon name="chevron-back-circle-outline" onclick="previousDays()"></ion-icon>
+                <div class="days"></div>
+                <ion-icon name="chevron-forward-circle-outline" onclick="nextDays()"></ion-icon>
+              </div>
+
+            <div class="options">
+                <ul class="times">
+                    <li>9:00</li>
+                    <li>10:00</li>
+                    <li>11:00</li>
+                    <li>12:00</li>
+                    <li>13:00</li>
+                    <li>14:00</li>
+                    <li>15:00</li>
+                    <li>16:00</li>
+                    <li>17:00</li>
+                    <li>18:00</li>
+                    <li>19:00</li>
+                    <li>20:00</li>
+                    <li>21:00</li>
+                    <li>22:00</li>
+                </ul>
+                <div class="sections">
+                    <div class="time-slot" data-start-time="9:00" data-end-time="10:00">
+                        <button class="btn"></button>
+                        <h4>9:00 > 10:00</h4>
+
+                        {% for member in team_members %}
+                        <i class="fa fa-user" style="font-size:35px;color:black"></i>
+
+                        {% endfor %}
+ 
+
+                    </div>
+                    <div class="time-slot" data-start-time="10:00" data-end-time="11:00">
+                        <button class="btn"></button>
+                        <h4>10:00 > 11:00</h4>
+                        {% for member in team_members %}
+                        <i class="fa fa-user" style="font-size:35px;color:black"></i>
+
+                        {% endfor %}
+                        
+                    </div>
+                    <div class="time-slot" data-start-time="11:00" data-end-time="12:00">
+                        <button class="btn"></button>
+                        <h4>11:00 > 12:00</h4>
+                        {% for member in team_members %}
+                        <i class="fa fa-user" style="font-size:35px;color:black"></i>
+
+                        {% endfor %}
+                        
+                    </div>
+                    <div class="time-slot" data-start-time="12:00" data-end-time="13:00">
+                        <button class="btn"></button>
+                        <h4>12:00 > 13:00</h4>
+                        {% for member in team_members %}
+                        <i class="fa fa-user" style="font-size:35px;color:black"></i>
+
+                        {% endfor %}
+                        
+                    </div>
+                    <div class="time-slot" data-start-time="13:00" data-end-time="14:00">
+                        <button class="btn"></button>
+                        <h4>13:00 > 14:00</h4>
+                        {% for member in team_members %}
+                        <i class="fa fa-user" style="font-size:35px;color:black"></i>
+
+                        {% endfor %}
+                        
+                    </div>
+                    <div class="time-slot" data-start-time="14:00" data-end-time="15:00">
+                        <button class="btn"></button>
+                        <h4>14:00 > 15:00</h4>
+                        {% for member in team_members %}
+                        <i class="fa fa-user" style="font-size:35px;color:black"></i>
+
+                        {% endfor %}
+                        
+                    </div>
+                    <div class="time-slot" data-start-time="15:00" data-end-time="16:00">
+                        <button class="btn"></button>
+                        <h4>15:00 > 16:00</h4>
+                        {% for member in team_members %}
+                        <i class="fa fa-user" style="font-size:35px;color:black"></i>
+
+                        {% endfor %}
+                        
+                    </div>
+                    <div class="time-slot" data-start-time="16:00" data-end-time="17:00">
+                        <button class="btn"></button>
+                        <h4>16:00 > 17:00</h4>
+                        {% for member in team_members %}
+                        <i class="fa fa-user" style="font-size:35px;color:black"></i>
+
+                        {% endfor %}
+                        
+                    </div>
+                    <div class="time-slot" data-start-time="17:00" data-end-time="18:00">
+                        <button class="btn"></button>
+                        <h4>17:00 > 18:00</h4>
+                        {% for member in team_members %}
+                        <i class="fa fa-user" style="font-size:35px;color:black"></i>
+
+                        {% endfor %}
+                        
+                    </div>
+                    <div class="time-slot" data-start-time="18:00" data-end-time="19:00">
+                        <button class="btn"></button>
+                        <h4>18:00 > 19:00</h4>
+                        {% for member in team_members %}
+                        <i class="fa fa-user" style="font-size:35px;color:black"></i>
+
+                        {% endfor %}
+                    </div>
+                    <div class="time-slot" data-start-time="19:00" data-end-time="20:00">
+                        <button class="btn"></button>
+                        <h4>19:00 > 20:00</h4>
+                        {% for member in team_members %}
+                        <i class="fa fa-user" style="font-size:35px;color:black"></i>
+
+                        {% endfor %}
+                        
+                    </div>
+                    <div class="time-slot" data-start-time="20:00" data-end-time="21:00">
+                        <button class="btn"></button>
+                        <h4>20:00 > 21:00</h4>
+                        {% for member in team_members %}
+                        <i class="fa fa-user" style="font-size:35px;color:black"></i>
+
+                        {% endfor %}
+
+                        
+                    </div>
+                    <div class="time-slot" data-start-time="21:00" data-end-time="22:00">
+                        <button class="btn"></button>
+                        <h4>21:00 > 22:00</h4>
+                        {% for member in team_members %}
+                        <i class="fa fa-user" style="font-size:35px;color:black"></i>
+
+                        {% endfor %}
+                        
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+    <script src="{% static 'hub/js/schedule_meeting.js' %}"></script>
+</body>
+</html>

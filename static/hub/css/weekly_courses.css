@@ -1,0 +1,165 @@
+body {
+	font-family: Arial, sans-serif;
+	margin: 0;
+    background-color: rgb(245, 245, 245);
+    
+}
+
+
+
+header {
+	display: flex;
+	align-items: left;
+	height: 80px;
+	background-color: rgb(245, 245, 245);
+	padding: 10px 0px 20px 0px;
+	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.bar {
+    background-color: grey;
+	height: 60px;
+	display: flex;
+	align-items: center;
+    
+}
+
+
+.bar h2 {
+    color: white;
+    margin:0px;
+    padding: 20px;
+    font-size: 30px;
+}
+
+.content h2{
+    margin-top: 40px;
+    margin-left: 20px;
+  
+}
+
+
+.select {
+    margin-top: 60px;
+    margin-left: 50px;
+    
+}
+.day {
+    display: flex;
+    justify-content: center;
+}
+.day h3{
+    width: 120px;
+    margin-right: 40px;
+
+}
+
+
+.options{
+    padding-left: 0px;
+    height: 45px;
+    width: 100%;
+    float: right;
+    display: flex;
+
+    margin-right: 20px;
+    list-style-type: none;
+    background-color: #ededed;
+    border-radius: 7px;
+    margin-top: 10px;
+
+}
+
+
+.options li {
+    display: flex;
+    height: 30px;
+    width: 100%;
+    padding: 7px;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border-right: 1px black solid;
+    border-left: 1px black solid;
+    transition: 0.5s ease;
+
+}
+
+#edge-r{
+    border-right: none;
+    border-bottom-right-radius: 7px;
+    border-top-right-radius: 7px;
+
+}
+
+#edge-l{
+    border-left: none;
+    border-bottom-left-radius: 7px;
+    border-top-left-radius: 7px;
+}
+
+.options li:hover {
+    background-color: silver;
+    border-style:ridge;
+
+    border-width: 1px;
+
+    transition: 0.5s ease;
+}
+
+.selected {
+    background-color: #d3d3d3
+ 
+  }
+
+.submit {
+    display: flex;
+    justify-content: right;
+}
+
+.save-btn {
+    width: 100px;
+    height: 40px;
+    margin-right: 40px;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    font-size: 18px;
+    border: none;
+    border-radius: 7px;
+    transition: 0.4s ease;
+    cursor: pointer;
+    background-color: grey;
+}
+
+.save-btn:hover{
+    background-color: #D3D3D3;
+
+}
+.logo {
+	flex: 1;
+    padding: 0;
+}
+
+.logo img {
+	height: 100px;
+}
+
+.title {
+	flex: 2;
+	text-align: left;
+    margin: 15px;
+}
+
+.title h1 {
+	margin: 0;
+	font-size: 36px;
+	font-weight: bold;
+}
+
+.title p {
+	margin: 0;
+    margin-left: 30px;
+	font-size: 18px;
+	color: gray;
+}
+

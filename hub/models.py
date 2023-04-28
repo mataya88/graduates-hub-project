@@ -21,7 +21,7 @@ class User(models.Model):
     name = models.CharField(max_length=40)
     phone = models.PositiveIntegerField()
     bio = models.TextField(max_length=500)
-    photo = models.ImageField(null=True, blank=True)
+    photo = models.ImageField(default='default.png', upload_to='profile_pics/', blank=True)
     website = models.URLField(null=True, blank=True)
     email = models.EmailField()
 
@@ -37,7 +37,7 @@ class Notification(models.Model):
     status = models.CharField(max_length=1, choices=STATUSES)
     sender = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name='sent_notification')
-    receiver = models.ForeignKey(
+    receiver = models.ForeignKey(       
         User, on_delete=models.CASCADE, related_name='received_notification')
 
 
@@ -45,6 +45,9 @@ class Team(models.Model):
     name = models.CharField(max_length=30)
     project = models.OneToOneField(
         'Post', on_delete=models.SET_NULL, null=True)
+
+    def __str__(self):
+        return self.name
 
 
 class Student(User):
@@ -120,12 +123,16 @@ class Post(models.Model):
     post_type = models.CharField(max_length=3, choices=POST_TYPES)
     creator = models.ForeignKey(User, on_delete=models.CASCADE, null=False)
 
+    def __str__(self):
+        return (self.title)
+
 
 class Image(models.Model):
     photo = models.ImageField()
     alt_text = models.CharField(max_length=200)
     line = models.PositiveIntegerField()
 
+   
 
 class Meeting(models.Model):
     title = models.CharField(max_length=30)

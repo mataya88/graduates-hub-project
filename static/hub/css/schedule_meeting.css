@@ -1,0 +1,290 @@
+body {
+	font-family: Arial, sans-serif;
+	margin: 0;
+    background-color: rgb(245, 245, 245);
+    
+}
+
+
+
+header {
+	display: flex;
+	align-items: left;
+	height: 80px;
+	background-color: rgb(245, 245, 245);
+	padding: 10px 0px 20px 0px;
+	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.bar {
+    background-color: grey;
+	height: 60px;
+	display: flex;
+	align-items: center;
+    
+}
+
+
+.bar h2 {
+    color: white;
+    margin:0px;
+    padding: 20px;
+    font-size: 30px;
+}
+
+.content {
+    display: flex;
+    background-color: #D3D3D3;
+}
+
+.sideinfo {
+    background-color: #D3D3D3;
+    width: 300px;
+    height: 1100px;
+    padding: 10px;
+}
+
+.sideinfo h2 {
+
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 17px;
+    width: 300px;
+    padding-left: 20px;
+    font-weight: bold;
+}
+
+.members {
+    display: flex;
+    gap: 20px;
+    padding-left: 20px;
+}
+
+.team .member {
+    padding-top: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+.team .member img{
+    height: 50px;   
+    width: 50px; 
+}
+
+.team .memeber alt{
+    font-size:  10px;
+}
+
+.meetings {
+    padding-left: 20px;
+}
+
+.meetings h2{
+    padding: 0px;
+}
+
+.meetings .meeting{
+    width: auto;
+    height: auto;
+    background-color: white;
+    border-radius: 7px;
+    padding: 20px;
+    margin-bottom: 20px;
+    margin-right: 30px;
+    box-shadow: 2px 2px 5px grey;
+}
+
+.meetings .meeting h5{
+    margin-bottom: 0px;
+    margin-top: 7px;
+    margin-left: 5px;
+}
+
+.meetings .meeting h6{
+    margin-top: 15px;
+    margin-bottom: 10px;
+    margin-left: 5px;
+    color: grey;
+}
+
+.meetings .meeting hr{
+    width: auto;
+    border-style: solid;
+    border-width: 1px;
+    border-color: grey;
+}
+
+
+
+.schedule_container {
+    width: 1030px;
+    background-color: white;
+    border-top-left-radius: 7px;
+
+}
+.top_bar {
+    display: flex;
+    text-align: center;
+    align-items: center;
+    padding-left: 20px;
+    margin-bottom: 20px;
+}
+
+.top_bar .create_btn {
+    margin-left: 650px;
+}
+
+.top_bar .create_btn button{
+    border: none;
+    height: 35px;
+    width: 150px;
+    border-radius: 7px;
+    background-color: lightgrey;
+    font-size: 16px;
+    font-weight:500;
+    cursor: pointer;
+
+}
+.top_bar .create_btn button:hover{
+    background-color: #A9A9A9;
+}
+
+
+.select_day {
+    height: 70px;
+    width: 700px;
+    display: flex;
+    padding-left: 40px;
+    background-color: #e4e4e4;
+    margin: auto;
+    align-items: center;
+    border-radius: 7px;
+  }
+  
+  .select_day ion-icon {
+    font-size: 30px;
+    transition: 0.5s ease;
+    cursor: pointer;
+    padding: 10px;
+  }
+  
+  .days {
+    display: flex;
+    flex-direction: row;
+  }
+  
+  .days button {
+    width: 80px;
+    border: none;
+    background-color: #e4e4e4;
+    margin: auto;
+    cursor: pointer;
+    border-radius: 7px;
+  }
+  
+  .days button:hover {
+    background-color: rgb(245, 245, 245);
+  }
+  
+  .days button h3 {
+    font-size: 13px;
+    margin: 5px;
+  }
+
+  /*
+  .days button.today {
+    background-color: #007bff;
+    color: #fff;
+  }
+  */
+  .days button.selected {
+    background-color: #007bff;
+    color: #fff;
+  }
+
+
+
+.options {
+    display: flex;
+}
+.times {
+    float: left;
+    list-style-type: none;
+    margin-top: 50px;
+}
+
+.times li{
+    margin-top:40px
+}
+
+.sections {
+    margin-top: 97px;
+    margin-left: 25px;
+
+}
+
+
+.time-slot {
+    display: flex;
+    border-top-style: dashed;
+    border-bottom-style: dashed;
+    border-width: 1px;
+    margin-top: -2px;
+    margin-bottom: -2px;
+    width: 800px;
+    height: 58.5px;
+    background-color: #e4e4e4;
+    padding-left: 10px;
+    align-items: center;
+    border-radius: 5px;
+}
+
+.time-slot h4{
+    width: 120px;
+    margin-right: 500px;
+}
+.time-slot .btn{
+    margin-left: 10px;
+    margin-right: 30px;
+    width: 24px;
+    height: 24px;
+    border-radius: 11px;
+    border-width: 1px;
+    cursor: pointer;
+    background-color: white;
+}
+
+.time-slot .active {
+    background-color: black;
+    color: white;
+  }
+
+
+.logo {
+	flex: 1;
+    padding: 0;
+}
+
+.logo img {
+	height: 100px;
+}
+
+.title {
+	flex: 2;
+	text-align: left;
+    margin: 15px;
+}
+
+.title h1 {
+	margin: 0;
+	font-size: 36px;
+	font-weight: bold;
+}
+
+.title p {
+	margin: 0;
+    margin-left: 30px;
+	font-size: 18px;
+	color: gray;
+}
+

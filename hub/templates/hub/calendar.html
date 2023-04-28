@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Graduates Hub</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'hub/css/calendar.css' %}">
+</head>
+<body>
+	<header>
+		<div class="logo">
+			<img src="{% static 'hub/img/GraduatesHubLogo.png' %}" alt="Graduates Hub Logo">
+		</div>
+		<div class="title">
+			<h1>Graduates Hub</h1>
+			<p>Where career dreams come true</p>
+		</div>
+	</header>
+
+	<div class = "bar">
+        <h2>Schedule</h2>
+  </div>
+	<div class="container"> 
+    <div class="calendar">
+      <div class="header">
+        <button class="prev">&#10094;</button>
+        <div class="month-name"></div>
+        <button class="next">&#10095;</button>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Sun</th>
+            <th>Mon</th>
+            <th>Tue</th>
+            <th>Wed</th>
+            <th>Thu</th>
+            <th>Fri</th>
+            <th>Sat</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    
+  </div>
+	
+    
+    
+  <script src="{% static 'hub/js/calendar.js' %}"></script>
+</body>
+</html>

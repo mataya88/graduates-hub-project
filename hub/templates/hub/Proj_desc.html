@@ -1,0 +1,73 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Graduates Hub</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'hub/css/proj_desc.css' %}">
+</head>
+<body>
+	<header>
+		<div class="logo">
+			<img src="{% static 'hub/img/GraduatesHubLogo.png' %}" alt="Graduates Hub Logo">
+		</div>
+		<div class="title">
+			<h1>Graduates Hub</h1>
+			<p>Where career dreams come true</p>
+		</div>
+	</header>
+
+	<div class = "bar">
+        <h2>Project Description</h2>
+		<div class="edit">
+			<button class="edit-btn">Edit Information</button>
+		</div>
+    </div>
+	
+	<div class="desc">
+		<div class="content">
+			<div class="top-row">
+				<h4>Project Name:</h4>
+				<div class="status">
+					<h4>Project Status: </h4>
+					<button class="st-btn">Ongoing</button>
+				</div>
+			</div>
+
+			<h4>Team Name:</h4>
+			<h4 class="overview">Project Overview:</h4>
+			<h4 class="prblm">Problem Statement:</h4>
+			<h4 class="sol"> Proposed Solution:</h4>
+		</div>
+
+		<div class="team-info">
+			<h4 class="team-title">Team Members</h4>
+			<div class="member">
+				<p>David McCurthy</p>
+				<a href="#">View profile</a>
+			</div>
+			<div class="member">
+				<p>Michael Angelo</p>
+				<a href="#">View profile</a>
+			</div>
+			<div class="member">
+				<p>Leonardo Castello</p>
+				<a href="#">View profile</a>
+			</div>
+			<div class="member">
+				<p>John Smith</p>
+				<a href="#">View profile</a>
+			</div>
+			<div class="tools">
+				<h4>Tools Needed:</h4>
+				<ul>
+					<li>Java Script</li>
+					<li>HTML & CSS</li>
+					<li>Python</li>
+					<li>React.js</li>
+
+				</ul>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
