@@ -11,6 +11,9 @@ def get_skill_set(request):
     skills = Skill.objects.all()
     return render(request, 'hub/our_skills.html', {'skills': skills})
 
+# Return the page schedule meetings with the team data and meetings data needed
+# Creates a meeting with the data the user specified in the page
+
 def get_schedule_meeting_page(request):
 
     team = Team.objects.get(name="Bugs-Slayerz")
@@ -51,17 +54,7 @@ def get_schedule_meeting_page(request):
         # Return a response to the user
         return redirect('calendar')
 
-    """
-    team_members = [
-        {"name": "Abdelrahman Hesham", "picture": "/profile_pics/robot.png"},
-        {"name": "Muataz Attaia", "picture": "/profile_pics/profile2.png"},
-        {"name": "AbdulAziz Aldhafeeri", "picture": "/profile_pics/profile2.png"},
-        {"name": "John Doe", "picture": "/profile_pics/profile2.png"}
-    ]
-    """
-
     
-   
     meetingsObj = Meeting.objects.filter(team=team)
 
     meetings = []
@@ -74,6 +67,7 @@ def get_schedule_meeting_page(request):
  
     return render(request, 'hub/schedule_meeting.html', context)
 
+# A function to return occupancies of the team: Used in schedule meeting page to show occupied and unoccupied members for a meeting slot
 def get_occupancies(request):
     day_of_week = int(request.GET.get('dayOfWeek'))
     days = {0: 'Sun', 1: 'Mon', 2: 'Tue', 3: 'Wed', 4: 'Thu', 5: 'Fri', 6: 'Sat'}
@@ -98,50 +92,46 @@ def get_occupancies(request):
     return JsonResponse(data, safe=False)
 
 
+# Returns the url of the calendar page
 def get_calendar(request):
 
     return render(request, 'hub/calendar.html')
 
 
-
+# Used by the calendar page to get events(meetings) in each day of a specific month and year for a student
 def get_events(request):
+    # Fetch the team
+    team = Team.objects.get(name="Bugs-Slayerz")
+
+    # Fetch the requested month and year
     year = int(request.GET.get('year'))
     month = int(request.GET.get('month'))
-    """
-    start_date = datetime.date(year, month, 1)
-    end_date = datetime.date(year, month, calendar.monthrange(year, month)[1])
-    data = DataModel.objects.filter(Q(date__gte=start_date) & Q(date__lte=end_date)).values_list('field1', 'field2', 'field3', 'field4')
-    return JsonResponse(list(data), safe=False)
-    """
-    # Dummy Data
-    data = [ { 
-            0: 'Meeting: 9:00',
-            1: 'Meeting: 11:00',
-            2: 'Meeting: 18:00',
 
-        },
-        {   0: 'Meeting: 9:00',
-            1: 'Meeting: 11:00',
-            2: 'Meeting: 18:00',
-            3: 'Meeting: 20:00',
-        },
-        {   0: 'Meeting: 9:00',
-            1: 'Meeting: 11:00',
-            2: 'Meeting: 18:00',
-        },]
-    """
-    queryset = YourModel.objects.all()
-    for obj in queryset:
-        data.append({
-            'field_1': obj.field_1,
-            'field_2': obj.field_2,
-            'field_3': obj.field_3,
-            'field_4': obj.field_4,
-        })"""
+    print(year)
+    print(month)
+
+    # Get the meetings data for every day in that month and year
+    
+    data = []
+    
+    for day in range(1, 31):
+        day_meetings = Meeting.objects.filter(team= team, date__year=year, date__month=month+1, date__day=day)
+        day_data = {}
+        i = 0
+        for meeting in day_meetings:
+            start = meeting.start_time.strftime('%I:%M %p')
+            title = meeting.title
+            day_data[i] = f"{start}: {title}"
+            i += 1
+
+        data.append(day_data)
+    
+ 
     return JsonResponse(data, safe=False)
 
 
-
+# Return the edit courses page
+# Also, updates the database with the occupancies that the user selected in the page
 def submit_courses(request):
     student = Student.objects.get(name="Abdelrahman Hesham")
     
@@ -174,10 +164,11 @@ def submit_courses(request):
 
 
 
-
+# Returns project description page
 def get_project(request):
     return render(request, 'hub/Proj_desc.html')
 
+# Returns search page
 def get_search(request):
     return render(request, 'hub/search_page.html')
 
