@@ -12,7 +12,6 @@
 	<header>
 		<div class="logo">
 			<img src="{% static 'hub/img/GraduatesHubLogo.png' %}" alt="Graduates Hub Logo">
-            <img src="{% static 'hub/img/GraduatesHubLogo.png' %}">
 		</div>
 		<div class="title">
 			<h1>Graduates Hub</h1>
@@ -20,35 +19,13 @@
 		</div>
 	</header>
     <div class = "bar">
-        <h2>Schedule a Meeting</h2>	
+        <h2>Schedule a Meeting</h2>
+        <p id="message">Please select a time slot  !!</p>	
     </div>
     <div class="content">
         <div class="sideinfo">
             <div class="team">
                 <h2>Team Members</h2>
-                <!--
-                <div class="members">
-                    <div class="member">
-                        <i class="fa fa-user" style="font-size:48px;color:black"></i>
-                        <h4>DM</h4>
-                
-                    </div>
-                    <div class="member">
-                        <i class="fa fa-user" style="font-size:48px;color:black"></i>
-                        <h4>MA</h4>
-            
-                    </div>
-                    <div class="member">
-                        <i class="fa fa-user" style="font-size:48px;color:black"></i>
-                        <h4>LC</h4>
-            
-                    </div>
-                    <div class="member">
-                        <i class="fa fa-user" style="font-size:48px;color:black"></i>
-                        <h4>JS  </h4>
-            
-                    </div>
-                -->
                 <div class="members">
                     {% for tmember in team_members %}
                     <div class="member">
@@ -56,8 +33,6 @@
                       <h4>{{ tmember.name }}</h4>
                     </div>
                     {% endfor %}
-                  
-                  
                 </div>
 
                 <div class="meetings">
@@ -94,8 +69,12 @@
             <div class="top_bar">
                 <h3>Select meeting day</h3>
                 <div class="create_btn">
-                    <button>Create Meeting</button>
+                    <button id="myButton">Create Meeting</button>
                 </div>
+                <form id="myForm" action="{% url 'new-meeting' %}" method="POST" style="display:none;">
+                    {% csrf_token %}
+                    <input type="hidden" id="meet_data" name="meeting_data" value="">
+                </form>
             </div>
 
             <div class="select_day">
@@ -122,122 +101,147 @@
                     <li>22:00</li>
                 </ul>
                 <div class="sections">
-                    <div class="time-slot" data-start-time="9:00" data-end-time="10:00">
+                    <div class="time-slot" data-start-time="9:00" data-end-time="10:00" data-member1="no" data-member2="no" data-member3="no" data-member4="no">
                         <button class="btn"></button>
                         <h4>9:00 > 10:00</h4>
 
                         {% for member in team_members %}
-                        <i class="fa fa-user" style="font-size:35px;color:black"></i>
-
+                        <div class="icon">
+                            <i class="fa fa-user" style="font-size:35px;color:black"></i>
+                            <h6>{{member.name}}</h6>
+                        </div>
                         {% endfor %}
  
 
                     </div>
-                    <div class="time-slot" data-start-time="10:00" data-end-time="11:00">
+                    <div class="time-slot" data-start-time="10:00" data-end-time="11:00" data-member1="no" data-member2="no" data-member3="no" data-member4="no">
                         <button class="btn"></button>
                         <h4>10:00 > 11:00</h4>
                         {% for member in team_members %}
-                        <i class="fa fa-user" style="font-size:35px;color:black"></i>
-
+                        <div class="icon">
+                            <i class="fa fa-user" style="font-size:35px;color:black"></i>
+                            <h6>{{member.name}}</h6>
+                        </div>
                         {% endfor %}
                         
                     </div>
-                    <div class="time-slot" data-start-time="11:00" data-end-time="12:00">
+                    <div class="time-slot" data-start-time="11:00" data-end-time="12:00" data-member1="no" data-member2="no" data-member3="no" data-member4="no">
                         <button class="btn"></button>
                         <h4>11:00 > 12:00</h4>
                         {% for member in team_members %}
-                        <i class="fa fa-user" style="font-size:35px;color:black"></i>
-
+                        <div class="icon">
+                            <i class="fa fa-user" style="font-size:35px;color:black"></i>
+                            <h6>{{member.name}}</h6>
+                        </div>
                         {% endfor %}
                         
                     </div>
-                    <div class="time-slot" data-start-time="12:00" data-end-time="13:00">
+                    <div class="time-slot" data-start-time="12:00" data-end-time="13:00" data-member1="no" data-member2="no" data-member3="no" data-member4="no">
                         <button class="btn"></button>
                         <h4>12:00 > 13:00</h4>
                         {% for member in team_members %}
-                        <i class="fa fa-user" style="font-size:35px;color:black"></i>
-
+                        <div class="icon">
+                            <i class="fa fa-user" style="font-size:35px;color:black"></i>
+                            <h6>{{member.name}}</h6>
+                        </div>
                         {% endfor %}
                         
                     </div>
-                    <div class="time-slot" data-start-time="13:00" data-end-time="14:00">
+                    <div class="time-slot" data-start-time="13:00" data-end-time="14:00" data-member1="no" data-member2="no" data-member3="no" data-member4="no">
                         <button class="btn"></button>
                         <h4>13:00 > 14:00</h4>
                         {% for member in team_members %}
-                        <i class="fa fa-user" style="font-size:35px;color:black"></i>
-
+                        <div class="icon">
+                            <i class="fa fa-user" style="font-size:35px;color:black"></i>
+                            <h6>{{member.name}}</h6>
+                        </div>
                         {% endfor %}
-                        
                     </div>
-                    <div class="time-slot" data-start-time="14:00" data-end-time="15:00">
+                    <div class="time-slot" data-start-time="14:00" data-end-time="15:00" data-member1="no" data-member2="no" data-member3="no" data-member4="no">
                         <button class="btn"></button>
                         <h4>14:00 > 15:00</h4>
                         {% for member in team_members %}
-                        <i class="fa fa-user" style="font-size:35px;color:black"></i>
-
+                        <div class="icon">
+                            <i class="fa fa-user" style="font-size:35px;color:black"></i>
+                            <h6>{{member.name}}</h6>
+                        </div>
                         {% endfor %}
                         
                     </div>
-                    <div class="time-slot" data-start-time="15:00" data-end-time="16:00">
+                    <div class="time-slot" data-start-time="15:00" data-end-time="16:00" data-member1="no" data-member2="no" data-member3="no" data-member4="no">
                         <button class="btn"></button>
                         <h4>15:00 > 16:00</h4>
                         {% for member in team_members %}
-                        <i class="fa fa-user" style="font-size:35px;color:black"></i>
-
+                        <div class="icon">
+                            <i class="fa fa-user" style="font-size:35px;color:black"></i>
+                            <h6>{{member.name}}</h6>
+                        </div>
                         {% endfor %}
                         
                     </div>
-                    <div class="time-slot" data-start-time="16:00" data-end-time="17:00">
+                    <div class="time-slot" data-start-time="16:00" data-end-time="17:00" data-member1="no" data-member2="no" data-member3="no" data-member4="no">
                         <button class="btn"></button>
                         <h4>16:00 > 17:00</h4>
                         {% for member in team_members %}
-                        <i class="fa fa-user" style="font-size:35px;color:black"></i>
-
+                        <div class="icon">
+                            <i class="fa fa-user" style="font-size:35px;color:black"></i>
+                            <h6>{{member.name}}</h6>
+                        </div>
                         {% endfor %}
                         
                     </div>
-                    <div class="time-slot" data-start-time="17:00" data-end-time="18:00">
+                    <div class="time-slot" data-start-time="17:00" data-end-time="18:00" data-member1="no" data-member2="no" data-member3="no" data-member4="no">
                         <button class="btn"></button>
                         <h4>17:00 > 18:00</h4>
                         {% for member in team_members %}
-                        <i class="fa fa-user" style="font-size:35px;color:black"></i>
-
+                        <div class="icon">
+                            <i class="fa fa-user" style="font-size:35px;color:black"></i>
+                            <h6>{{member.name}}</h6>
+                        </div>
                         {% endfor %}
                         
                     </div>
-                    <div class="time-slot" data-start-time="18:00" data-end-time="19:00">
+                    <div class="time-slot" data-start-time="18:00" data-end-time="19:00" data-member1="no" data-member2="no" data-member3="no" data-member4="no">
                         <button class="btn"></button>
                         <h4>18:00 > 19:00</h4>
                         {% for member in team_members %}
-                        <i class="fa fa-user" style="font-size:35px;color:black"></i>
-
+                        <div class="icon">
+                            <i class="fa fa-user" style="font-size:35px;color:black"></i>
+                            <h6>{{member.name}}</h6>
+                        </div>
                         {% endfor %}
                     </div>
-                    <div class="time-slot" data-start-time="19:00" data-end-time="20:00">
+                    <div class="time-slot" data-start-time="19:00" data-end-time="20:00" data-member1="no" data-member2="no" data-member3="no" data-member4="no">
                         <button class="btn"></button>
                         <h4>19:00 > 20:00</h4>
                         {% for member in team_members %}
-                        <i class="fa fa-user" style="font-size:35px;color:black"></i>
-
+                        <div class="icon">
+                            <i class="fa fa-user" style="font-size:35px;color:black"></i>
+                            <h6>{{member.name}}</h6>
+                        </div>
                         {% endfor %}
                         
                     </div>
-                    <div class="time-slot" data-start-time="20:00" data-end-time="21:00">
+                    <div class="time-slot" data-start-time="20:00" data-end-time="21:00" data-member1="no" data-member2="no" data-member3="no" data-member4="no">
                         <button class="btn"></button>
                         <h4>20:00 > 21:00</h4>
                         {% for member in team_members %}
-                        <i class="fa fa-user" style="font-size:35px;color:black"></i>
-
+                        <div class="icon">
+                            <i class="fa fa-user" style="font-size:35px;color:black"></i>
+                            <h6>{{member.name}}</h6>
+                        </div>
                         {% endfor %}
 
                         
                     </div>
-                    <div class="time-slot" data-start-time="21:00" data-end-time="22:00">
+                    <div class="time-slot" data-start-time="21:00" data-end-time="22:00" data-member1="no" data-member2="no" data-member3="no" data-member4="no">
                         <button class="btn"></button>
                         <h4>21:00 > 22:00</h4>
                         {% for member in team_members %}
-                        <i class="fa fa-user" style="font-size:35px;color:black"></i>
-
+                        <div class="icon">
+                            <i class="fa fa-user" style="font-size:35px;color:black"></i>
+                            <h6>{{member.name}}</h6>
+                        </div>
                         {% endfor %}
                         
                     </div>
@@ -245,6 +249,20 @@
             </div>
 
 
+        </div>
+
+        <div id="myModal" class="modal">
+            <div class="modal-content">
+              <span class="close">&times;</span>
+              <form class="meeting-info-input">
+                <h3>Enter Meeting Details</h3>
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" maxlength="30"><br><br>
+                <label for="description">Description:</label>
+                <textarea placeholder="Enter your description here..." maxlength="200"></textarea>
+                <button class="finalsubmit">Create Meeting</button>
+              </form>
+            </div>
         </div>
     </div>
     <script src="{% static 'hub/js/schedule_meeting.js' %}"></script>

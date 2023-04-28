@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect, HttpResponse
 from .models import *
 from django.http import JsonResponse
-
+from datetime import datetime, time
+import json
 
 # Create your views here.
 
@@ -11,16 +12,55 @@ def get_skill_set(request):
     return render(request, 'hub/our_skills.html', {'skills': skills})
 
 def get_schedule_meeting_page(request):
+
+    team = Team.objects.get(name="Bugs-Slayerz")
+    team_members = Student.objects.filter(team=team)
     
+    # If this is a POST request, the user has submitted the form
+    if request.method == 'POST':
+        # Retrieve the data from the form
+        data_attributes = request.POST.get('meeting_data').split(',')
+
+        meeting_name = data_attributes[0]
+        meeting_desc = data_attributes[1]
+        year = "2023"
+        month = data_attributes[2]
+        day = data_attributes[3]
+        start_time = datetime.strptime(data_attributes[4], '%H:%M').time()
+        end_time = datetime.strptime(data_attributes[5], '%H:%M').time()
+        members_available_str = data_attributes[6:]
+
+        date_string = f"{year}-{month}-{day}"
+        date_obj = datetime.strptime(date_string, '%Y-%m-%d').date()
+
+        members_available_obj = []
+        for i, student in enumerate(team_members):
+            if members_available_str[i] == 'yes':
+                members_available_obj.append(student)
+
+        print(meeting_name, meeting_desc, date_obj, start_time, end_time, members_available_obj)
+
+        meeting = Meeting(title=meeting_name, description=meeting_desc, start_time=start_time, end_time=end_time,
+                date=date_obj, team=team)
+
+        meeting.save()
+
+        meeting.members_available.add(*members_available_obj)
+
+
+        # Return a response to the user
+        return redirect('calendar')
+
+    """
     team_members = [
         {"name": "Abdelrahman Hesham", "picture": "/profile_pics/robot.png"},
         {"name": "Muataz Attaia", "picture": "/profile_pics/profile2.png"},
         {"name": "AbdulAziz Aldhafeeri", "picture": "/profile_pics/profile2.png"},
         {"name": "John Doe", "picture": "/profile_pics/profile2.png"}
     ]
+    """
 
-    team = Team.objects.get(name="Bugs-Slayerz")
-    team_members = Student.objects.filter(team=team)
+    
    
     meetingsObj = Meeting.objects.filter(team=team)
 
@@ -103,14 +143,28 @@ def get_events(request):
 
 
 def submit_courses(request):
+    student = Student.objects.get(name="Abdelrahman Hesham")
+    
+ 
     # If this is a POST request, the user has submitted the form
     if request.method == 'POST':
-        # Retrieve the data from the form
-        data_slots = request.POST.getlist('slots')
-        slot_list = data_slots[0].split(',')
-        print(slot_list)
+        # Retrieve the data from the form input (name="slots")
+        selected_slots = json.loads(request.POST.get('slots'))
+        print(selected_slots)
 
-        # Do something with the data here
+        # Get references to Occupancy items
+        occupancies_obj = []
+        for slot in selected_slots:
+            day = slot["day"]
+            start = datetime.strptime(slot["start"], '%H:%M').time()
+            end = datetime.strptime(slot["end"], '%H:%M').time()
+            occupancy = Occupancy.objects.get(day=day, start_time=start, end_time=end)
+            occupancies_obj.append(occupancy)
+        
+        print(occupancies_obj)
+
+        student.occupancies.set(occupancies_obj)
+
 
         # Return a response to the user
         return redirect('calendar')

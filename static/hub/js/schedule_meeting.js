@@ -14,6 +14,8 @@
             <h3>${day.getDate()}</h3>
             `;
             dayButton.setAttribute('data-day-of-week', day.getDay());
+            dayButton.setAttribute('data-month', day.getMonth()+1);
+            dayButton.setAttribute('data-date', day.getDate());
             if (day.toDateString() === today.toDateString()) {
             //dayButton.classList.add("today");
             dayButton.classList.add("selected")
@@ -90,56 +92,57 @@
 
 
         
-        function processData(data) {
-            const timeSlots = document.querySelectorAll('.time-slot');
-            console.log('timeSlots:', timeSlots);
+function processData(data) {
+    const timeSlots = document.querySelectorAll('.time-slot');
+    console.log('timeSlots:', timeSlots);
+
+
+    // Iterate through each time slot
+    timeSlots.forEach(timeSlot => {
+        const startTime = parseInt(timeSlot.dataset.startTime.split(':').join('')+'00');
+        const endTime = parseInt(timeSlot.dataset.endTime.split(':').join('')+'00');
+
+        console.log(startTime);
+        console.log(endTime);
+
+
+        const icons = timeSlot.querySelectorAll('.icon');
+        console.log('icons:', icons);
+
+        // Iterate through each icon for this time slot
+        icons.forEach((icon, index) => {
+        // Assume that the member is not occupied
+        let isOccupied = false;
+
+        // Check if the member is occupied during this time slot
+        const memberOccupancy = data[index];
+        console.log('memberOccupancy:', memberOccupancy);
+        
+        memberOccupancy.forEach(occupancy => {
+            const occstart = parseInt(occupancy["start"].split(':').join(''));
+            const occend = parseInt(occupancy["end"].split(':').join(''));
             
-          
-            // Iterate through each time slot
-            timeSlots.forEach(timeSlot => {
-                const startTime = parseInt(timeSlot.dataset.startTime.split(':').join('')+'00');
-                const endTime = parseInt(timeSlot.dataset.endTime.split(':').join('')+'00');
 
-                console.log(startTime);
-                console.log(endTime);
+            if (occstart <= startTime && occend >= endTime) { // 
+            isOccupied = true;
+            }
+            
+        });
+        console.log(isOccupied)
 
 
-              const icons = timeSlot.querySelectorAll('i');
-              console.log('icons:', icons);
-          
-              // Iterate through each icon for this time slot
-              icons.forEach((icon, index) => {
-                // Assume that the member is not occupied
-                let isOccupied = false;
-          
-                // Check if the member is occupied during this time slot
-                const memberOccupancy = data[index];
-                console.log('memberOccupancy:', memberOccupancy);
-                
-                memberOccupancy.forEach(occupancy => {
-                    const occstart = parseInt(occupancy["start"].split(':').join(''));
-                    const occend = parseInt(occupancy["end"].split(':').join(''));
-                    
+        // Show or hide the icon based on the occupancy status
+        if (isOccupied) {
+            timeSlot.setAttribute(`data-member${index+1}`, 'no');
+            icon.style.opacity = '0';
+        } else {
+            timeSlot.setAttribute(`data-member${index+1}`, 'yes');
+            icon.style.opacity = '1';
+        }
+        });
+    });
+}
 
-                  if (occstart <= startTime && occend >= endTime) { // 
-                    isOccupied = true;
-                  }
-                  
-                });
-                console.log(isOccupied)
-
-          
-                // Show or hide the icon based on the occupancy status
-                if (isOccupied) {
-
-                  icon.style.display = 'none';
-                } else {
-                  icon.style.display = 'block';
-                }
-              });
-            });
-          }
-          
           
 
 // get all the button elements
@@ -179,3 +182,101 @@ listItems.forEach((item) => {
     item.textContent = initials;
 });
 });
+
+const icons = document.querySelectorAll('.icon');
+icons.forEach(icon => {
+// Select all the li elements in the available-list
+    const name = icon.querySelector('h6');
+
+    // Split the name into words
+    const words = name.textContent.trim().split(' ');
+    // Get the first letter of each word and combine them
+    const initials = words.map((word) => word.charAt(0)).join('');
+    // Set the content of the li element to the initials
+    name.textContent = initials;
+
+});
+
+
+
+// Get a reference to the "Create Meeting" button
+const createButton = document.querySelector('.finalsubmit');
+
+// Attach a click event listener to the button
+createButton.addEventListener('click', (event) => {
+    event.preventDefault();
+  // Find the selected button
+  const selectedButton = document.querySelector('.active');
+  const selectedDay  = document.querySelector('.selected')
+
+  // Check if a selected button was found
+  if (selectedButton) {
+    // Get the parent div element of the selected button
+    const parentDiv = selectedButton.closest('.time-slot');
+    const meeting_name = document.getElementById("name").value;
+    const meeting_desc = document.querySelector("textarea").value;
+
+    // Extract the data attributes from the parent div element
+    const dataAttributes = [
+    meeting_name, meeting_desc,
+    selectedDay.getAttribute('data-month'),
+    selectedDay.getAttribute('data-date'),
+    parentDiv.getAttribute('data-start-time'),
+    parentDiv.getAttribute('data-end-time'),
+    parentDiv.getAttribute('data-member1'),
+    parentDiv.getAttribute('data-member2'),
+    parentDiv.getAttribute('data-member3'),
+    parentDiv.getAttribute('data-member4')
+    ];
+
+    const formInput = document.querySelector('#meet_data');
+    formInput.value = dataAttributes;
+
+    document.querySelector('#myForm').submit();
+
+    // Send the data to the Django backend using an HTTP request
+    /*
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', '/create_meeting');
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send(JSON.stringify({ date, time, location }));
+    */
+  }
+});
+
+
+// Get the modal element
+var modal = document.getElementById("myModal");
+
+// Get the button that opens the modal
+var btn = document.getElementById("myButton");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal
+btn.onclick = function() {
+    // Check if there is an element with class .active
+    var active = document.querySelector(".active");
+    if (active) {
+      modal.style.display = "block";
+    } else {
+      // Display the "select a slot" message
+      message.style.display = "flex";
+      // Hide the message after 3 seconds
+      setTimeout(function() {
+        message.style.display = "none";
+      }, 1800);
+    }
+  }
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}

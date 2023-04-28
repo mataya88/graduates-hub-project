@@ -41,7 +41,7 @@ header {
 
 .select {
     margin-top: 60px;
-    margin-left: 50px;
+    margin-left: 30px;
     
 }
 .day {
@@ -50,7 +50,7 @@ header {
 }
 .day h3{
     width: 120px;
-    margin-right: 40px;
+    margin-right: 20px;
 
 }
 
@@ -61,7 +61,6 @@ header {
     width: 100%;
     float: right;
     display: flex;
-
     margin-right: 20px;
     list-style-type: none;
     background-color: #ededed;
@@ -73,11 +72,12 @@ header {
 
 .options li {
     display: flex;
-    height: 30px;
+    height: 33px;
     width: 100%;
-    padding: 7px;
+    padding: 5px;
     align-items: center;
     justify-content: center;
+    text-align: center;
     cursor: pointer;
     border-right: 1px black solid;
     border-left: 1px black solid;
@@ -100,11 +100,9 @@ header {
 
 .options li:hover {
     background-color: silver;
-    border-style:ridge;
-
+    border-style: ridge;
     border-width: 1px;
-
-    transition: 0.5s ease;
+    transition: 0.7s linear;
 }
 
 .selected {
@@ -128,11 +126,11 @@ header {
     border-radius: 7px;
     transition: 0.4s ease;
     cursor: pointer;
-    background-color: grey;
+    background-color: lightgrey;
 }
 
 .save-btn:hover{
-    background-color: #D3D3D3;
+    background-color: #a9a9a9;
 
 }
 .logo {
