@@ -29,7 +29,7 @@
                 <div class="members">
                     {% for tmember in team_members %}
                     <div class="member">
-                      <img src="{% static 'hub/img/Profile_photo.png' %}" alt="{{ tmember.name }}">
+                      <img src="{% static 'hub/img/Profile_photo.png' %}" title="{{ tmember.name }}">
                       <h4>{{ tmember.name }}</h4>
                     </div>
                     {% endfor %}

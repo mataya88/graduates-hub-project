@@ -123,7 +123,7 @@ function processData(data) {
             const occend = parseInt(occupancy["end"].split(':').join(''));
             
 
-            if (occstart <= startTime && occend >= endTime) { // 
+            if (occstart < endTime && occend > startTime) { // 
             isOccupied = true;
             }
             
