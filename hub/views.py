@@ -180,3 +180,15 @@ def handle_sponsorship():
 
 def get_student_home(request):
     return render(request, 'hub/Student_Home.html')
+
+def get_recommended_partners(request):
+    return render(request, 'hub/recommended_partners.html')
+
+def get_student_profile(request):
+    return render(request, 'hub/student_profile.html')
+
+def get_advisor_home(request):
+    return render(request, 'hub/advisor_home.html')
+
+def get_company_home(request):
+    return render(request, 'hub/company_home.html')

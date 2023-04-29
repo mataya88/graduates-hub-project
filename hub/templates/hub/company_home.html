@@ -1,0 +1,86 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'hub/css/company_home.css' %}">
+</head>
+
+<body>
+    <header>
+		<div class="logo">
+			<img src="{% static 'hub/img/GraduatesHubLogo.png' %}" alt="Graduates Hub Logo">
+		</div>
+		<div class="title">
+			<h1>GRADUATES HUB</h1>
+			<p>"Where career dream comes true"</p>
+		</div>
+		<img src="{% static 'hub/img/Profile_photo.png' %}" class="head-profile" width="60px" height="60px">
+	</header>
+	<div class="topnav">
+		<a href="#About Us">About Us</a>
+		<input type="text" placeholder="Search..">
+	  </div>
+	  <h2 style="font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;font-size: large;font-weight: bold; margin-left: 10px;">Capstone Design Ideas 🞃</h2>
+	  <div class="main-content-container">
+		<div class="main-content-block">
+		  <img src="{% static 'hub/img/drone.png' %}" alt="Icon 1">
+		  <h1>Autonomous Agricultural Drone</h1>
+		  <p>a drone equipped with advanced sensors and artificial intelligence algorithms to to autonomously monitor crop health, optimize irrigation and fertilization, and detect pest infestations in large agricultural fields.</p>
+		  <button>Details</button>
+		</div>
+		<div class="main-content-block">
+		  <img src="{% static 'hub/img/robot.png' %}" alt="Icon 2">
+		  <h1>Assistive Robotic Exoskeleton</h1>
+		  <p>assistive robotic exoskeleton that can enhance the mobility and independence of individuals with mobility impairments, such as spinal cord injuries or neuromuscular disorders</p>
+		  <button>Details</button>
+		</div>
+		<div class="main-content-block">
+		  <img src="{% static 'hub/img/mental.png' %}" alt="Icon 3">
+		  <h1>Virtual Reality Therapy for Mental Health</h1>
+		  <p>virtual reality (VR) therapy system that uses immersive experiences to help individuals with mental health conditions, such as anxiety or phobias, overcome their challenges.</p>
+      <button>Details</button>
+    </div>
+    <!-- Add more main content blocks here -->
+    <div class="main-content-block">
+      <img src="{% static 'hub/img/GraduatesHubLogo.png' %}" alt="Icon 4">
+      <h1>Graduates Hub      </h1>
+      <p>system for senior undergraduate students to 
+		help them in their Capstone Design Project journey. The system will solve different 
+		problems students face such as team formation, ideas, and sponsorships.</p>
+      <button>Details</button>
+    </div>
+  </div>
+  <script>
+    // Scroll right button functionality
+    document.getElementById('scrollRightBtn').addEventListener('click', function() {
+      document.querySelector('.main-content-container').scrollBy({ left: 300, behavior: 'smooth' });
+    });
+  </script>
+
+
+<u><h3 style="margin-left: 60%;font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;font-size: large;font-weight: bold; margin-top: 0%;">Sponsorship & Jobs Request</h3></u>
+<div class="timeline">
+  <div class="timeline-event">
+    <div class="timeline-date">14 Jan 2024</div>
+    <h2>Graduates Hub Sponsorship</h2>
+    <p>Software designed to help kuwait university's students to find their ideal Capstone group and design
+    </p>
+    <button>Accept</button>
+  <button>Deny</button>
+  </div>
+  <div class="timeline-event">
+    <div class="timeline-date">13 Sep 2024</div>
+    <h2>Data Analyst job</h2>
+    <p>My name is Ali and I would like to apply For this Job</p> 
+       <u><p>CV attached with certifications </p></u>
+        <button>Accept</button>
+        <button>Deny</button>
+  </div>
+  </div>
+</div>
+</body>
+</html>
