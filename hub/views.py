@@ -177,3 +177,6 @@ def get_profile(request):
 
 def handle_sponsorship():
     result = [{'name': 'ahmad', 'phone': '35353', '':''}]
+
+def get_student_home(request):
+    return render(request, 'hub/Student_Home.html')
