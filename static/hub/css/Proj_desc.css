@@ -1,0 +1,182 @@
+body {
+	font-family: Arial, sans-serif;
+	margin: 0;
+    background-color: rgb(245, 245, 245);
+    
+}
+
+
+
+header {
+	display: flex;
+	align-items: left;
+	height: 80px;
+	background-color: rgb(245, 245, 245);
+	padding: 10px 0px 20px 0px;
+	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.bar {
+    background-color: grey;
+	height: 60px;
+	display: flex;
+	align-items: center;
+    
+}
+
+
+.bar h2 {
+    color: white;
+    margin:0px;
+    padding: 20px;
+    font-size: 30px;
+}
+
+.edit {
+	float: left;
+	margin-left: 800px;
+	width: 150px;
+	
+}
+
+.edit-btn {
+	width: 130px;
+	height: 35px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: 0.4s ease;
+	font-family: Arial, Helvetica, sans-serif;
+	color: black;
+	font-weight: bold;
+}
+
+
+
+.edit-btn:hover {
+	background-color: #c5c6d0;
+}
+
+.desc{
+	display: flex;
+	height: auto;
+	width: auto;
+}
+.content {
+	height: auto;
+	width: 1030px;
+	padding-left: 10px;
+
+}
+
+ .top-row{
+	padding-top: 10px;
+	display: flex;
+}
+.top-row .status {
+	display: flex;
+	margin-left: 550px;
+}
+
+.st-btn {
+	height: 30px;
+	width: 100px;
+	margin-top: 15px;
+	margin-left: 10px;
+	padding-left: 0;
+	padding-right: 10px;
+	cursor: pointer;
+	border: none;
+	border-radius: 5px;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-weight: bold;
+	transition: 0.4s ease;
+
+}
+
+.st-btn:hover{
+	background-color: #c5c6d0;
+}
+
+
+.content .overview {
+	height: 200px;
+}
+
+.content .prblm {
+	height: 400px;
+}
+.content .sol {
+	height: 500px;
+}
+
+.team-info {
+	background-color: #E8E8E8;
+	box-shadow:  4px 4px rgba(0, 0, 0, 0.25);
+	width: 310px;
+	
+}
+.team-info .team-title {
+	padding-left: 10px;
+	font-size: 18px;
+}
+.team-info .member {
+	display: flex;
+	background-color: #D3D3D3;
+	border: none;
+	margin: 10px;
+	border-radius: 10px;
+	padding-left: 10px;
+
+}	
+.team-info .member p {
+	float: left;
+	width: 150px;
+	margin-right: 30px;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 15px;
+	font-weight: bold;
+}
+.tools {
+	margin-top: 100px;
+	padding-left: 10px;
+}
+.team-info div a{
+	height: 20px;
+	text-decoration: none;
+	color: black;
+	font-size: 14px;
+	margin-top: 15px;
+	float: right;
+
+}
+
+.logo {
+	flex: 1;
+    padding: 0;
+}
+
+.logo img {
+	height: 100px;
+}
+
+.title {
+	flex: 2;
+	text-align: left;
+    margin: 15px;
+}
+
+.title h1 {
+	margin: 0;
+	font-size: 36px;
+	font-weight: bold;
+}
+
+.title p {
+	margin: 0;
+    margin-left: 30px;
+	font-size: 18px;
+	color: gray;
+}
+

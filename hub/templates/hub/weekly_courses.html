@@ -1,0 +1,115 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Graduates Hub</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'hub/css/weekly_courses.css' %}">
+</head>
+<body>
+	<header>
+		<div class="logo">
+			<img src="{% static 'hub/img/GraduatesHubLogo.png' %}" alt="Graduates Hub Logo">
+		</div>
+		<div class="title">
+			<h1>Graduates Hub</h1>
+			<p>Where career dreams come true</p>
+		</div>
+	</header>
+
+	<div class = "bar">
+        <h2>Schedule > Edit Weekly Courses</h2>
+    </div>
+	
+	<div class="content">
+        <h2>Select your weekly courses:</h2>
+        <div class="select">
+            <div class="day">
+                <h3>Sunday</h3>  
+                    <ul class="options" data-day="Sun">
+                        <li id="edge-l" onclick="toggleButton(this)" data-start="8:00" data-end="9:00">8:00 - 9:00</li>
+                        <li onclick="toggleButton(this)" data-start="9:00" data-end="10:00">9:00 - 10:00</li>
+                        <li onclick="toggleButton(this)" data-start="10:00" data-end="11:00">10:00 - 11:00</li>
+                        <li onclick="toggleButton(this)" data-start="11:00" data-end="12:00">11:00 - 12:00</li>
+                        <li onclick="toggleButton(this)" data-start="12:00" data-end="13:00">12:00 - 13:00</li>
+                        <li onclick="toggleButton(this)" data-start="13:00" data-end="14:00">13:00 - 14:00</li>
+                        <li onclick="toggleButton(this)" data-start="14:00" data-end="15:00">14:00 - 15:00</li>
+                        <li onclick="toggleButton(this)" data-start="15:00" data-end="16:00">15:00 - 16:00</li>
+                        <li onclick="toggleButton(this)" data-start="16:00" data-end="17:00">16:00 - 17:00</li>
+                        <li onclick="toggleButton(this)" data-start="17:00" data-end="18:00">17:00 - 18:00</li>
+                        <li id="edge-r" onclick="toggleButton(this)" data-start="18:00" data-end="19:00">18:00 - 19:00</li>
+
+                    </ul>
+                
+            </div>
+            <div class="day">
+                <h3>Monday</h3>                  
+                    <ul class="options", data-day="Mon">
+                        <li id="edge-l" onclick="toggleButton(this)" data-start="8:00" data-end="9:15">8:00 - 9:15</li>
+                        <li onclick="toggleButton(this)" data-start="9:30" data-end="10:45">9:30 - 10:45</li>
+                        <li onclick="toggleButton(this)" data-start="11:00" data-end="12:15">12:00 - 12:15</li>
+                        <li onclick="toggleButton(this)" data-start="14:00" data-end="15:15">14:00 - 15:15</li>
+                        <li onclick="toggleButton(this)" data-start="15:30" data-end="16:45">15:30 - 16:45</li>
+                        <li id="edge-r" onclick="toggleButton(this)" data-start="17:00" data-end="18:15">17:00 - 18:15</li>
+
+                    </ul>
+            </div>
+            <div class="day">
+                <h3>Tuesday</h3>                   
+                    <ul class="options" data-day="Tue">
+                        <li id="edge-l" onclick="toggleButton(this)" data-start="8:00" data-end="9:00">8:00 - 9:00</li>
+                        <li onclick="toggleButton(this)" data-start="9:00" data-end="10:00">9:00 - 10:00</li>
+                        <li onclick="toggleButton(this)" data-start="10:00" data-end="11:00">10:00 - 11:00</li>
+                        <li onclick="toggleButton(this)" data-start="11:00" data-end="12:00">11:00 - 12:00</li>
+                        <li onclick="toggleButton(this)" data-start="12:00" data-end="13:00">12:00 - 13:00</li>
+                        <li onclick="toggleButton(this)" data-start="13:00" data-end="14:00">13:00 - 14:00</li>
+                        <li onclick="toggleButton(this)" data-start="14:00" data-end="15:00">14:00 - 15:00</li>
+                        <li onclick="toggleButton(this)" data-start="15:00" data-end="16:00">15:00 - 16:00</li>
+                        <li onclick="toggleButton(this)" data-start="16:00" data-end="17:00">16:00 - 17:00</li>
+                        <li onclick="toggleButton(this)" data-start="17:00" data-end="18:00">17:00 - 18:00</li>
+                        <li id="edge-r" onclick="toggleButton(this)" data-start="18:00" data-end="19:00">18:00 - 19:00</li>
+                    </ul>
+            </div>
+            <div class="day">
+                <h3>Wednesday</h3>  
+                    <ul class="options" data-day="Wed">
+                        <li id="edge-l" onclick="toggleButton(this)" data-start="8:00" data-end="9:15">8:00 - 9:15</li>
+                        <li onclick="toggleButton(this)" data-start="9:30" data-end="10:45">9:30 - 10:45</li>
+                        <li onclick="toggleButton(this)" data-start="11:00" data-end="12:15">12:00 - 12:15</li>
+                        <li onclick="toggleButton(this)" data-start="14:00" data-end="15:15">14:00 - 15:15</li>
+                        <li onclick="toggleButton(this)" data-start="15:30" data-end="16:45">15:30 - 16:45</li>
+                        <li id="edge-r" onclick="toggleButton(this)" data-start="17:00" data-end="18:15">17:00 - 18:15</li>
+                    </ul>
+            </div>
+            <div class="day">
+                <h3>Thursday</h3>
+                    <ul class="options" data-day="Thu">
+                        <li id="edge-l" onclick="toggleButton(this)" data-start="8:00" data-end="9:00">8:00 - 9:00</li>
+                        <li onclick="toggleButton(this)" data-start="9:00" data-end="10:00">9:00 - 10:00</li>
+                        <li onclick="toggleButton(this)" data-start="10:00" data-end="11:00">10:00 - 11:00</li>
+                        <li onclick="toggleButton(this)" data-start="11:00" data-end="12:00">11:00 - 12:00</li>
+                        <li onclick="toggleButton(this)" data-start="12:00" data-end="13:00">12:00 - 13:00</li>
+                        <li onclick="toggleButton(this)" data-start="13:00" data-end="14:00">13:00 - 14:00</li>
+                        <li onclick="toggleButton(this)" data-start="14:00" data-end="15:00">14:00 - 15:00</li>
+                        <li onclick="toggleButton(this)" data-start="15:00" data-end="16:00">15:00 - 16:00</li>
+                        <li onclick="toggleButton(this)" data-start="16:00" data-end="17:00">16:00 - 17:00</li>
+                        <li onclick="toggleButton(this)" data-start="17:00" data-end="18:00">17:00 - 18:00</li>
+                        <li id="edge-r" onclick="toggleButton(this)" data-start="18:00" data-end="19:00">18:00 - 19:00</li>
+                    </ul>
+            </div>
+
+            
+        </div>
+
+        <div class="submit">
+            <button class="save-btn"> Save</button>
+        </div>
+        <form id="myForm" action="{% url 'edit-courses' %}" method="POST" style="display:none;">
+            {% csrf_token %}
+            <input type="hidden" id="slots" name="slots" value="">
+          </form>
+    </div>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script src="{%static 'hub/js/weekly_courses.js' %}"></script>
+
+</body>
+</html>
