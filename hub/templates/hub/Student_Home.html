@@ -70,13 +70,14 @@
 	  </div>
     <h2 style="font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;font-size: large;font-weight: bold; margin-left: 10px;">Capstone Design Ideas 🞃</h2>
 	  <div class="main-content-container">
+		{% for Post in Posts %}
 		<div class="main-content-block">
-		  <img src="{% static 'hub/img/drone.png' %}" alt="Icon 1">
-		  <h1>Autonomous Agricultural Drone</h1>
-		  <p>a drone equipped with advanced sensors and artificial intelligence algorithms to to autonomously monitor crop health, optimize irrigation and fertilization, and detect pest infestations in large agricultural fields.</p>
+		  <h1>{{Post.title}}</h1>
+		  <p>{{Post.content}}</p>
 		  <button>Details</button>
 		</div>
-		<div class="main-content-block">
+		{% endfor %}
+		<!--<div class="main-content-block">
 		  <img src="{% static 'hub/img/robot.png' %}" alt="Icon 2">
 		  <h1>Assistive Robotic Exoskeleton</h1>
 		  <p>assistive robotic exoskeleton that can enhance the mobility and independence of individuals with mobility impairments, such as spinal cord injuries or neuromuscular disorders</p>
@@ -88,7 +89,7 @@
 		  <p>virtual reality (VR) therapy system that uses immersive experiences to help individuals with mental health conditions, such as anxiety or phobias, overcome their challenges.</p>
       <button>Details</button>
     </div>
-    <!-- Add more main content blocks here -->
+     Add more main content blocks here 
     <div class="main-content-block">
       <img src="{% static 'hub/img/GraduatesHubLogo.png' %}" alt="Icon 4">
       <h1>Graduates Hub      </h1>
@@ -96,7 +97,7 @@
 		help them in their Capstone Design Project journey. The system will solve different 
 		problems students face such as team formation, ideas, and sponsorships.</p>
       <button>Details</button>
-    </div>
+    </div>-->
   </div>
   <script>
     // Scroll right button functionality
