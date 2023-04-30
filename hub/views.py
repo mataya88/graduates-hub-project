@@ -178,17 +178,30 @@ def get_profile(request):
 def handle_sponsorship():
     result = [{'name': 'ahmad', 'phone': '35353', '':''}]
 
+# Returns Student Home page
 def get_student_home(request):
-    return render(request, 'hub/Student_Home.html')
+    Posts = Post.objects.all()
+    Meetings = Meeting.objects.all()
+    context = {'Posts': Posts, 'Meetings': Meetings}
+    return render(request, 'hub/Student_Home.html', context)
 
+# Returns Recommended Partners (Students) page
 def get_recommended_partners(request):
-    return render(request, 'hub/recommended_partners.html')
+    Users = User.objects.all()
+    Students = Student.objects.all()
+    context = {'Users': Users, 'Students': Students}
+    return render(request, 'hub/recommended_partners.html', context)
 
 def get_student_profile(request):
     return render(request, 'hub/student_profile.html')
 
+# Returns Advisor Home page
 def get_advisor_home(request):
-    return render(request, 'hub/advisor_home.html')
+    Posts = Post.objects.all()
+    return render(request, 'hub/advisor_home.html',{'Posts':Posts})
 
+# Returns Company Home page
 def get_company_home(request):
     return render(request, 'hub/company_home.html')
+
+

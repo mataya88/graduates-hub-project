@@ -15,32 +15,15 @@
 			<img src="{% static 'hub/img/GraduatesHubLogo.png' %}" alt="Graduates Hub Logo">
 		</div>
 		<div class="title">
-			<h1>GRADUATES HUB</h1>
-			<p>"Where career dream comes true"</p>
+			<h1 style="margin-left: 35%;">GRADUATES HUB</h1>
+			<p style="margin-left: 35%;">"Where career dream comes true"</p>
 		</div>
 		<img src="{% static 'hub/img/Profile_photo.png' %}" class="head-profile" width="60px" height="60px">
         
 	</header>
 	<div class="topnav">
+		<a class="active" href="{% url 'student-home' %}" id="Home">Home
 		<a class="active" href="#MyTeam" id="myButton">My Team
-			<div class="additional-buttons">
-			  <button style="float: left;
-        display: block;
-        color: gray;
-        text-align: center;
-        padding: 14px 16px;
-        text-decoration: none;
-        font-size: 17px;">Find Partners</button>
-			  <button style="float: left;
-        display: block;
-        color: gray;
-        text-align: center;
-        padding: 14px 16px;
-        text-decoration: none;
-        font-size: 17px;">Create/Edit Project</button>
-
-			</div>
-		  
 			<script>
 			  // Add click event listener to the main button
 			  document.getElementById("myButton").addEventListener("click", function() {
@@ -49,13 +32,8 @@
 				additionalButtons.style.display = (additionalButtons.style.display === "none") ? "flex" : "none";
 			  });
 			</script>
-		<a class="active" href="#home" id="myButton1">Schedule
-			<div class="additional-buttons1">
-			  <button>My Schedule</button>
-			  <button>Schedule a meeting</button>
-			  <button>Edit Weekly hours</button>
-
-			</div>
+		<a class="active" href="#Schedule" id="myButton1">Schedule
+			
 		  
 			<script>
 			  // Add click event listener to the main button
@@ -68,6 +46,16 @@
 		<a href="#contact">About Us</a>
 		<input type="text" placeholder="Search..">
 	  </div>
+	  <div class="additional-buttons">
+		<a href="{% url 'recommended' %}"><button>Recommended partners</button></a>
+		<a href="#"><button>Create/Edit Post</button></a>
+	  </div>
+	  <div class="additional-buttons1">
+		<a href="{% url 'calendar' %}"><button>calendar</button></a>
+		<a href="{% url 'new-meeting' %}"><button>Schedule a meeting</button></a>
+		<a href="{% url 'edit-courses' %}"><button>Edit Weekly hours</button></a>
+	  </div>
+	</div>
     <h2 style="font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;font-size: large;font-weight: bold; margin-left: 10px;">Capstone Design Ideas 🞃</h2>
 	  <div class="main-content-container">
 		{% for Post in Posts %}
@@ -76,28 +64,7 @@
 		  <p>{{Post.content}}</p>
 		  <button>Details</button>
 		</div>
-		{% endfor %}
-		<!--<div class="main-content-block">
-		  <img src="{% static 'hub/img/robot.png' %}" alt="Icon 2">
-		  <h1>Assistive Robotic Exoskeleton</h1>
-		  <p>assistive robotic exoskeleton that can enhance the mobility and independence of individuals with mobility impairments, such as spinal cord injuries or neuromuscular disorders</p>
-		  <button>Details</button>
-		</div>
-		<div class="main-content-block">
-		  <img src="{% static 'hub/img/mental.png' %}" alt="Icon 3">
-		  <h1>Virtual Reality Therapy for Mental Health</h1>
-		  <p>virtual reality (VR) therapy system that uses immersive experiences to help individuals with mental health conditions, such as anxiety or phobias, overcome their challenges.</p>
-      <button>Details</button>
-    </div>
-     Add more main content blocks here 
-    <div class="main-content-block">
-      <img src="{% static 'hub/img/GraduatesHubLogo.png' %}" alt="Icon 4">
-      <h1>Graduates Hub      </h1>
-      <p>system for senior undergraduate students to 
-		help them in their Capstone Design Project journey. The system will solve different 
-		problems students face such as team formation, ideas, and sponsorships.</p>
-      <button>Details</button>
-    </div>-->
+		{% endfor%}
   </div>
   <script>
     // Scroll right button functionality
@@ -114,24 +81,17 @@
 		<img src="{% static 'hub/img/Profile_photo.png' %}" alt="Icon 6">
 		<h2>Abdelrahman Hesham</h2>
 		<img src="{% static 'hub/img/Profile_photo.png' %}" alt="Icon 7">
-		<h2>Abdulaziz Aldhafeeri</h2>
+		<h2>Abdbuttonaziz Aldhafeeri</h2>
 	</div>
 	<div class="timeline">
+	{% for Meeting in Meetings %}
 	  <div class="timeline-event">
-		<div class="timeline-date">14 Jan 2023</div>
-		<h2>Team meeting</h2>
-		<p>brain storming and choose project idea</p>
+		<div class="timeline-date">{{Meeting.date}}</div>
+		<h2>{{Meeting.title}}</h2>
+		<p>{{Meeting.description}}</p>
+		<p style="font-weight: bold;">From {{Meeting.start_time}} To {{Meeting.end_time}}</p>
 	  </div>
-	  <div class="timeline-event">
-		<div class="timeline-date">13 Feb 2023</div>
-		<h2>Proposal submision</h2>
-		<p>due date to submit proposal</p>
-	  </div>
-	  <div class="timeline-event">
-		<div class="timeline-date">22 Feb 2023</div>
-		<h2>Prototype submision</h2>
-		<p>due date to submit Prototype</p>
-	  </div>
+	{% endfor %}
   </div>
 </body>
 </html>

@@ -21,10 +21,11 @@ header {
 }
 
 
-/* Add a black background color to the top navigation bar */
+ /*Add a black background color to the top navigation bar */ 
 .topnav {
     overflow: hidden;
     background-color: gray;
+    position: relative;
   }
   
   /* Style the links inside the navigation bar */
@@ -47,6 +48,9 @@ header {
   /* Style the "active" element to highlight the current page */
   .topnav a.active {
     color: white;
+  }
+  .topnav:hover .additional-buttons {
+    display: block;
   }
   
   /* Style the search box inside the navigation bar */
@@ -72,7 +76,7 @@ header {
     .topnav input[type=text] {
       border: 1px solid #ccc;
     }
-  }
+  } */
 
 .logo {
 	flex: 1;
@@ -173,7 +177,7 @@ header {
     border-radius: 10px;
     margin-left: 20px;
     margin-top: 40px;
-    background-color: rgb(84, 163, 126);
+    background-color: rgb(42, 84, 65);
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
     text-align: center;
     color: #fff;
@@ -279,10 +283,12 @@ header {
 	  }
 
     .additional-buttons {
+     
       display: none;
       /* Set column layout */
       flex-direction: column;
       align-items: flex-start;
+      
     }
     .additional-buttons button {
       margin-bottom: 5px; /* Add some margin between buttons */
