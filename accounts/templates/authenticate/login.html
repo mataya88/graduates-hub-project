@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .body {
+            background-color: #344a72;
+            font-family: "Roboto", sans-serif;
+          }
+          
+          .signup-box {
+            width: 360px;
+            height: 620px;
+            margin: auto;
+            background-color: white;
+            border-radius: 3px;
+          }
+          
+          .login-box {
+            width: 360px;
+            height: 280px;
+            margin: auto;
+            border-radius: 3px;
+            background-color: white;
+          
+          }
+          
+          h1 {
+            text-align: center;
+            color: #fff;
+            display: block;
+            font-family:'Courier New', Courier, monospace;
+            background-color: rgb(37, 37, 141);
+          }
+          
+          h4 {
+            text-align: center;
+          }
+          
+          form {
+            width: 300px;
+            margin-left: 20px;
+          }
+          
+          form label {
+            display: flex;
+            margin-top: 20px;
+            font-size: 18px;
+          }
+          
+          form input {
+            width: 100%;
+            padding: 7px;
+            border: none;
+            border: 1px solid gray;
+            border-radius: 6px;
+            outline: none;
+          }
+          input[type="button"] {
+            width: 320px;
+            height: 35px;
+            margin-top: 20px;
+            border: none;
+            background-color: #49c1a2;
+            color: white;
+            font-size: 18px;
+          }
+          p {
+            text-align: center;
+            padding-top: 20px;
+            font-size: 15px;
+          }
+          .para-2 {
+            text-align: center;
+            color: white;
+            font-size: 15px;
+            margin-top: -10px;
+          }
+          .para-2 a {
+            color: #49c1a2;
+          }
+          
+        </style>
+    <title>Login</title>
+</head>
+<body>
+    <h1>Login</h1>
+    <br></br>
+    <div class="container">
+    {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        {% endfor %}
+    {% endif %}
+    </div>
+    <div class="login-box">
+        <form action="" method="POST">
+            {% csrf_token %}
+            <form>
+                <div class="mb-3">
+                  <label for="exampleInputEmail1" class="form-label">Username</label>
+                  <input type="text" class="form-control" name="username" aria-describedby="emailHelp">
+                  
+                <div class="mb-3">
+                  <label for="exampleInputPassword1" class="form-label">Password</label>
+                  <input type="password" class="form-control" name="password">
+                </div>
+                
+              
+
+            <input type="submit" value="Submit" class="submit-login"/>
+        </form>
+    </div>
+        <p class="para-2">
+            Not have an account? <a href="signup.html">Sign Up Here</a>
+        </p>
+    
+</body>
+</html>

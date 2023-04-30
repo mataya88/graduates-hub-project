@@ -25,5 +25,7 @@ admin.site.index_title = "Database Administration Page"
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('hub/', include("hub.urls")),
-    path('__debug__/', include('debug_toolbar.urls'))
+    path('__debug__/', include('debug_toolbar.urls')),
+    path('accounts/', include('django.contrib.auth.urls')),
+    path('accounts/', include('accounts.urls')),
 ]
