@@ -141,5 +141,5 @@ INTERNAL_IPS = [
  # ...
 ] 
 
-LOGIN_REDIRECT_URL = 'student-profile'
+LOGIN_REDIRECT_URL = 'student-home'
 LOGIN_URL = 'login'

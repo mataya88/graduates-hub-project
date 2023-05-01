@@ -11,7 +11,9 @@
   width: 95%;
 }
 
-
+.head-profile {
+  margin: 15px;
+}
 
 .calendar {
   border: 1px solid #ddd;

@@ -5,21 +5,23 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Graduates Hub</title>
     <link rel="stylesheet" type="text/css" href="{% static 'hub/css/Student_Home.css' %}">
 </head>
 
 <body>
     <header>
 		<div class="logo">
-			<img src="{% static 'hub/img/GraduatesHubLogo.png' %}" alt="Graduates Hub Logo">
+			<a  href="{% url 'student-home' %}"><img src="{% static 'hub/img/GraduatesHubLogo.png' %}" alt="Graduates Hub Logo"></a>
 		</div>
 		<div class="title">
-			<h1 style="margin-left: 35%;">GRADUATES HUB</h1>
+			<h1 style="margin-left: 35%;">Graduates Hub</h1>
 			<p style="margin-left: 35%;">"Where career dream comes true"</p>
 		</div>
-		<img src="{% static 'hub/img/Profile_photo.png' %}" class="head-profile" width="60px" height="60px">
-        
+		<a href="/logout/"><button class="logout-button"> Logout </button></a>
+		<a href="/hub/student-profile/{{user.profile.id}}">
+			<img src="{{user.profile.photo.url}}" class="head-profile" width="60px" height="60px">
+			</a>        
 	</header>
 	<div class="topnav">
 		<a class="active" href="{% url 'student-home' %}" id="Home">Home
@@ -61,6 +63,7 @@
 		{% for Post in Posts %}
 		<div class="main-content-block">
 		  <h1>{{Post.title}}</h1>
+		  <h3>{{Post.creator}}</h3>
 		  <p>{{Post.content}}</p>
 		  <button>Details</button>
 		</div>

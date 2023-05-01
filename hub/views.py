@@ -190,9 +190,9 @@ def handle_sponsorship():
 
 # Returns Student Home page
 def get_student_home(request):
-    Posts = Post.objects.all()
-    Meetings = Meeting.objects.all()
-    context = {'Posts': Posts, 'Meetings': Meetings}
+    posts = Post.objects.all().order_by('time')
+    meetings = Meeting.objects.all()
+    context = {'Posts': posts, 'Meetings': meetings}
     return render(request, 'hub/Student_Home.html', context)
 
 # Returns Recommended Partners (Students) page
@@ -213,6 +213,7 @@ def get_recommended_partners(request):
         .filter(
             personality__in=student.COMPATIBILITY_MATRIX[student.personality])
         .exclude(name=student.name)
+        
         .filter(skills__field__in=missed_skill_fields)
         .annotate(priority=Count('skills'))
         .order_by('-priority'))

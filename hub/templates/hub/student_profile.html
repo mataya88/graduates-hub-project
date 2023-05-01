@@ -9,13 +9,14 @@
 	<header>
 		<div class="logo">
 			<div class="logo">
-				<img src="{% static 'hub/img/GraduatesHubLogo.png' %}" alt="Graduates Hub Logo">
+				<a  href="{% url 'student-home' %}"><img src="{% static 'hub/img/GraduatesHubLogo.png' %}" alt="Graduates Hub Logo"></a>
 			</div>
 		</div>
 		<div class="title">
 			<h1>Graduates Hub</h1>
 			<p>Where career dreams come true</p>
 		</div>
+		<a href="/logout/"><button class="logout-button"> Logout </button></a>
 	</header>
 	<div class = "bar">
         <h2>Student Profile</h2>
@@ -49,7 +50,7 @@
 				
 				<p>Description: {{student.bio}}</p>
 				{% if student.website %}
-				<p href="omahasolutions.com">Website: {{student.website}}</p>
+				<p href="{{ student.website }}">Website: {{student.website}}</p>
 				{% endif %}
 				
 			</div>

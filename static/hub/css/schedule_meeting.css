@@ -23,7 +23,9 @@ header {
 	align-items: center;
     
 }
-
+.head-profile {
+  margin: 15px;
+}
 
 .bar h2 {
     color: white;

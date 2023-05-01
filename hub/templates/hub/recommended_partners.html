@@ -18,7 +18,10 @@
 			<h1>GRADUATES HUB</h1>
 			<p>"Where career dream comes true"</p>
 		</div>
-		<img src="{% static 'hub/img/Profile_photo.png' %}"class="head-profile" width="60px" height="60px">
+		<a href="/logout/"><button class="logout-button"> Logout </button></a>
+		<a href="/hub/student-profile/{{user.profile.id}}">
+		<img src="{{user.profile.photo.url}}" class="head-profile" width="60px" height="60px">
+		</a>
 	</header>
 	<div class = "bar">
         <h2>Recommended Partners</h2>
@@ -43,7 +46,7 @@
 			<td>{{Student.personality}}</td>
 			<td><button class="table-button-red">x</button></td>
 			<td><button class="table-button-green">✔</button></td>
-			<td><a href="{% url 'student-profile' %}" id="student_name"><button>View Profile</button></a></td>
+			<td><a href="/hub/student-profile/{{Student.id}}" id="student_name"><button>View Profile</button></a></td>
 			
 		  </tr>
 		{% endfor %}

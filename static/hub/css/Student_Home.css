@@ -21,6 +21,7 @@ header {
 }
 
 
+
  /*Add a black background color to the top navigation bar */ 
 .topnav {
     overflow: hidden;
@@ -163,6 +164,7 @@ header {
     color: #ffffff;
     cursor: pointer;
   }
+  
 
  
   /* Hide scroll arrow when scrolling is at the beginning or end */
@@ -317,3 +319,4 @@ header {
         text-decoration: none;
         font-size: 17px;
     }
+    
