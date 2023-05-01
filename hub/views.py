@@ -4,6 +4,8 @@ from django.http import JsonResponse
 from datetime import datetime, time
 import json
 from django.contrib.auth.decorators import login_required
+from django.db.models import Count
+
 
 # Create your views here.
 
@@ -185,4 +187,59 @@ def get_search(request):
 
 def handle_sponsorship():
     result = [{'name': 'ahmad', 'phone': '35353', '':''}]
+
+# Returns Student Home page
+def get_student_home(request):
+    Posts = Post.objects.all()
+    Meetings = Meeting.objects.all()
+    context = {'Posts': Posts, 'Meetings': Meetings}
+    return render(request, 'hub/Student_Home.html', context)
+
+# Returns Recommended Partners (Students) page
+def get_recommended_partners(request):
+
+    user_personality = 'ESTP'
+    
+    compatibility_matrix = {
+        'INTJ': ['ENFP', 'INFP', 'ENTJ', 'INTJ', 'INFJ', 'ISTJ'],
+        'INTP': ['ENFJ', 'INFJ', 'ENTP', 'INTP', 'INFP', 'ISTP'],
+        'INFJ': ['ENFP', 'INFP', 'ENTJ', 'INTJ', 'INFJ', 'ENFJ'],
+        'INFP': ['ENFJ', 'INFJ', 'ENTP', 'INTP', 'INFP', 'ENFP'],
+        'ISTJ': ['ENFJ', 'INFJ', 'ESFJ', 'ISFJ', 'ISTJ', 'ESTJ'],
+        'ISFJ': ['ENFJ', 'INFJ', 'ESFJ', 'ISFJ', 'ISTJ', 'ESTJ'],
+        'ISTP': ['ENFP', 'INFP', 'ENTP', 'INTP', 'ISFP', 'ISTP'],
+        'ISFP': ['ENFJ', 'INFJ', 'ESFP', 'ISFP', 'ISTP', 'ESTP'],
+        'ENTJ': ['ENFP', 'INFP', 'ENTJ', 'INTJ', 'INFJ', 'ENFJ'],
+        'ENTP': ['ENFJ', 'INFJ', 'ENTP', 'INTP', 'INFP', 'ENFP'],
+        'ENFJ': ['ENFP', 'INFP', 'ENTJ', 'INTJ', 'INFJ', 'ENTP'],
+        'ENFP': ['ENFJ', 'INFJ', 'ENTP', 'INTP', 'INFP', 'ENFP'],
+        'ESTJ': ['ESFJ', 'ISFJ', 'ISTJ', 'ESTJ', 'ENTJ', 'INTJ'],
+        'ESFJ': ['ESFJ', 'ISFJ', 'ISTJ', 'ESTJ', 'ENFJ', 'INFJ'],
+        'ESTP': ['ESFP', 'ISFP', 'ISTP', 'ESTP', 'ENTP', 'INTP'],
+        'ESFP': ['ESFJ', 'ISFJ', 'ESFP', 'ISFP', 'ISTP', 'ESTP']
+    }
+
+    # get list of compatible personalities
+    compatible_list = compatibility_matrix.get(user_personality)
+    
+    # filter Users and Students by compatible personalities
+    Students = Student.objects.filter(personality__in= compatible_list )
+    
+    return render(request, 'hub/recommended_partners.html', {'Students': Students})
+
+def get_student_profile(request):
+    
+    Students = Student.objects.all()
+    return render(request, 'hub/student_profile.html',{'Students': Students})
+
+# Returns Advisor Home page
+def get_advisor_home(request):
+    Posts = Post.objects.all()
+    return render(request, 'hub/advisor_home.html',{'Posts':Posts})
+
+# Returns Company Home page
+def get_company_home(request):
+    Posts = Post.objects.all()
+    return render(request, 'hub/company_home.html',{'Posts':Posts})
+
 

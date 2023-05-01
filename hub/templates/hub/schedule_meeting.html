@@ -11,7 +11,7 @@
 <body>
 	<header>
 		<div class="logo">
-			<img src="{% static 'hub/img/GraduatesHubLogo.png' %}" alt="Graduates Hub Logo">
+			<a  href="{% url 'student-home' %}"><img src="{% static 'hub/img/GraduatesHubLogo.png' %}" alt="Graduates Hub Logo"></a>
 		</div>
 		<div class="title">
 			<h1>Graduates Hub</h1>
@@ -257,7 +257,7 @@
               <form class="meeting-info-input">
                 <h3>Enter Meeting Details</h3>
                 <label for="name">Name:</label>
-                <input type="text" id="name" name="name" maxlength="30"><br><br>
+                <input type="text" id="name" name="name" maxlength="40"><br><br>
                 <label for="description">Description:</label>
                 <textarea placeholder="Enter your description here..." maxlength="200"></textarea>
                 <button class="finalsubmit">Create Meeting</button>

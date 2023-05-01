@@ -234,13 +234,6 @@ createButton.addEventListener('click', (event) => {
 
     document.querySelector('#myForm').submit();
 
-    // Send the data to the Django backend using an HTTP request
-    /*
-    const xhr = new XMLHttpRequest();
-    xhr.open('POST', '/create_meeting');
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.send(JSON.stringify({ date, time, location }));
-    */
   }
 });
 
