@@ -30,10 +30,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('hub/', include("hub.urls")),
     path('__debug__/', include('debug_toolbar.urls')),
-    # path('accounts/', include('django.contrib.auth.urls')),
-    # path('accounts/', include('accounts.urls')),
     path('register/', accounts_views.register, name='register'),
     path('login/', auth_views.LoginView.as_view(template_name='authenticate/login.html'), name='login'),
+    path('',auth_views.LoginView.as_view(template_name='authenticate/login.html'), name='root'),
     path('logout/', auth_views.LogoutView.as_view(template_name='authenticate/logout.html'), name='logout'),
     path('profile/me', accounts_views.profile, name='my-profile')
 
