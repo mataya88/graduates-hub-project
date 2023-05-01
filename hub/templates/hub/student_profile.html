@@ -1,0 +1,114 @@
+{% load static%}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Graduates Hub</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'hub/css/student_profile.css' %}">
+</head>
+<body>
+	<header>
+		<div class="logo">
+			<div class="logo">
+				<img src="{% static 'hub/img/GraduatesHubLogo.png' %}" alt="Graduates Hub Logo">
+			</div>
+		</div>
+		<div class="title">
+			<h1>Graduates Hub</h1>
+			<p>Where career dreams come true</p>
+		</div>
+	</header>
+	<div class = "bar">
+        <h2>Student Profile</h2>
+    </div>
+	<main>
+        
+        <div class="profile-info">
+		<div class="profile-title">
+            <h2> {{ student.name }}</h2>
+			<img src="{{ student.photo.url}}" alt="Profile Photo">
+		</div>
+		<div class="fields">
+			{% if team and not user.profile.team %}
+            <button>Request to join team</button>
+			{% elif not team and user.profile.team %}
+			<button>Invite to join team</button>
+			{% elif not team and not user.profile.team %}
+			<button>Request to create team</button>
+			{% endif %}
+            <div class="fields-info">
+			<div class="left">
+				<p>Skills: 
+					<ul>
+					{% for skill in skills %}
+					 <li>{{skill}}</li> 
+					{% endfor %}
+					</ul>
+				</p>
+				
+				<p>Personality Type: {{student.personality}}</p>
+				
+				<p>Description: {{student.bio}}</p>
+				{% if student.website %}
+				<p href="omahasolutions.com">Website: {{student.website}}</p>
+				{% endif %}
+				
+			</div>
+			<div class="right">
+				<p>Year of Study: {{study_year}} year</p>
+				
+			
+				
+				<p>Contact Info:</p>
+				<p>Email: {{ student.email }}</p>
+				<p>Phone: {{ student.phone }}</p>
+                
+			</div>
+        </div>
+		</div>
+    </div>
+		
+		<div class="dialog">
+			
+			<div class="team-members">
+				{% if team %}
+				<h3> Team: {{ student.team.name }}</h3>
+				<h3>  Members:</h3>
+				<ul>
+				{% for member in team %}
+				 <li><a href="/hub/student-profile/{{member.id}}">{{member}}</a></li>
+				{% endfor %}
+				</ul>
+				{% endif %}
+			</div>
+		
+            
+            <div class="posts">
+            <h3>Recent Posts</h3>
+			<div class="post-boxes">
+                <div id="post1">
+                    <!--<img src="team_work_photo.jpg" width="100px" height="80px">-->
+                    <div class="post-info">
+                    <h4>Python Decorators</h4>
+                    <p>
+                        Decorators are a great tool in python.
+                    </p>
+                </div>
+                </div>
+                <div id="post2">
+                    <!--<img src="team_work_photo.jpg" width="100px" height="80px">-->
+                    <div class="post-info">
+                    <h4>Team Work</h4>
+                    <p>
+                        Team work is very essential for success.
+                    </p>
+                </div>
+                </div>
+            </div>
+            <div>
+
+            </div>
+        </div>
+		</div>
+	</main>
+</body>
+</html>

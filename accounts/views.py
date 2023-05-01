@@ -46,8 +46,11 @@ def register(request):
 def profile(request):
     profile = request.user.profile
     user_skills = profile.skills.all()
-    user_team = profile.team.student_set.all().exclude(name=profile.name)
+    if profile.team:
+        user_team = profile.team.student_set.all().exclude(name=profile.name)
+    else:
+        user_team = []
     student_year = profile.ORDINALS[profile.year]
     context = {'skills': user_skills,
                'study_year': student_year, 'team': user_team}
-    return render(request, 'authenticate/student_profile.html', context)
+    return render(request, 'authenticate/personal_profile.html', context)

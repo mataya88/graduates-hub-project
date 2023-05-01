@@ -63,6 +63,25 @@ class Student(User):
     ORDINALS = {1: 'First', 2: 'Second', 3: 'Third', 4: 'Fourth', 5: 'Fifth',
                 6: 'Sixth', 7: 'Seventh', 8: 'Eighth', 9: 'Eighth', 10: 'tenth'}
 
+    COMPATIBILITY_MATRIX = {
+        'INTJ': ['ENFP', 'INFP', 'ENTJ', 'INTJ', 'INFJ', 'ISTJ'],
+        'INTP': ['ENFJ', 'INFJ', 'ENTP', 'INTP', 'INFP', 'ISTP'],
+        'INFJ': ['ENFP', 'INFP', 'ENTJ', 'INTJ', 'INFJ', 'ENFJ'],
+        'INFP': ['ENFJ', 'INFJ', 'ENTP', 'INTP', 'INFP', 'ENFP'],
+        'ISTJ': ['ENFJ', 'INFJ', 'ESFJ', 'ISFJ', 'ISTJ', 'ESTJ'],
+        'ISFJ': ['ENFJ', 'INFJ', 'ESFJ', 'ISFJ', 'ISTJ', 'ESTJ'],
+        'ISTP': ['ENFP', 'INFP', 'ENTP', 'INTP', 'ISFP', 'ISTP'],
+        'ISFP': ['ENFJ', 'INFJ', 'ESFP', 'ISFP', 'ISTP', 'ESTP'],
+        'ENTJ': ['ENFP', 'INFP', 'ENTJ', 'INTJ', 'INFJ', 'ENFJ'],
+        'ENTP': ['ENFJ', 'INFJ', 'ENTP', 'INTP', 'INFP', 'ENFP'],
+        'ENFJ': ['ENFP', 'INFP', 'ENTJ', 'INTJ', 'INFJ', 'ENTP'],
+        'ENFP': ['ENFJ', 'INFJ', 'ENTP', 'INTP', 'INFP', 'ENFP'],
+        'ESTJ': ['ESFJ', 'ISFJ', 'ISTJ', 'ESTJ', 'ENTJ', 'INTJ'],
+        'ESFJ': ['ESFJ', 'ISFJ', 'ISTJ', 'ESTJ', 'ENFJ', 'INFJ'],
+        'ESTP': ['ESFP', 'ISFP', 'ISTP', 'ESTP', 'ENTP', 'INTP'],
+        'ESFP': ['ESFJ', 'ISFJ', 'ESFP', 'ISFP', 'ISTP', 'ESTP']
+    }
+
     auth_user = models.OneToOneField(
         AuthUser, on_delete=models.CASCADE, related_name='profile')
 

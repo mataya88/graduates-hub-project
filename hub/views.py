@@ -196,41 +196,46 @@ def get_student_home(request):
     return render(request, 'hub/Student_Home.html', context)
 
 # Returns Recommended Partners (Students) page
+@login_required
 def get_recommended_partners(request):
 
-    user_personality = 'ESTP'
-    
-    compatibility_matrix = {
-        'INTJ': ['ENFP', 'INFP', 'ENTJ', 'INTJ', 'INFJ', 'ISTJ'],
-        'INTP': ['ENFJ', 'INFJ', 'ENTP', 'INTP', 'INFP', 'ISTP'],
-        'INFJ': ['ENFP', 'INFP', 'ENTJ', 'INTJ', 'INFJ', 'ENFJ'],
-        'INFP': ['ENFJ', 'INFJ', 'ENTP', 'INTP', 'INFP', 'ENFP'],
-        'ISTJ': ['ENFJ', 'INFJ', 'ESFJ', 'ISFJ', 'ISTJ', 'ESTJ'],
-        'ISFJ': ['ENFJ', 'INFJ', 'ESFJ', 'ISFJ', 'ISTJ', 'ESTJ'],
-        'ISTP': ['ENFP', 'INFP', 'ENTP', 'INTP', 'ISFP', 'ISTP'],
-        'ISFP': ['ENFJ', 'INFJ', 'ESFP', 'ISFP', 'ISTP', 'ESTP'],
-        'ENTJ': ['ENFP', 'INFP', 'ENTJ', 'INTJ', 'INFJ', 'ENFJ'],
-        'ENTP': ['ENFJ', 'INFJ', 'ENTP', 'INTP', 'INFP', 'ENFP'],
-        'ENFJ': ['ENFP', 'INFP', 'ENTJ', 'INTJ', 'INFJ', 'ENTP'],
-        'ENFP': ['ENFJ', 'INFJ', 'ENTP', 'INTP', 'INFP', 'ENFP'],
-        'ESTJ': ['ESFJ', 'ISFJ', 'ISTJ', 'ESTJ', 'ENTJ', 'INTJ'],
-        'ESFJ': ['ESFJ', 'ISFJ', 'ISTJ', 'ESTJ', 'ENFJ', 'INFJ'],
-        'ESTP': ['ESFP', 'ISFP', 'ISTP', 'ESTP', 'ENTP', 'INTP'],
-        'ESFP': ['ESFJ', 'ISFJ', 'ESFP', 'ISFP', 'ISTP', 'ESTP']
-    }
+    student = request.user.profile
+    student_skills_fields = [
+        skill.field for skill in list(student.skills.all())]
 
-    # get list of compatible personalities
-    compatible_list = compatibility_matrix.get(user_personality)
+    # fields where the student does not have skills in
+    missed_skill_fields = [skill.field for skill in list(
+        Skill.objects.exclude(field__in=student_skills_fields))]
+
+
+    # students that have more skills in other fields will have more prioriy
+    recommended_students = (Student.objects
+        .filter(
+            personality__in=student.COMPATIBILITY_MATRIX[student.personality])
+        .exclude(name=student.name)
+        .filter(skills__field__in=missed_skill_fields)
+        .annotate(priority=Count('skills'))
+        .order_by('-priority'))
+    print(recommended_students)
     
     # filter Users and Students by compatible personalities
-    Students = Student.objects.filter(personality__in= compatible_list )
     
-    return render(request, 'hub/recommended_partners.html', {'Students': Students})
+    return render(request, 'hub/recommended_partners.html', {'Students': recommended_students})
 
-def get_student_profile(request):
-    
-    Students = Student.objects.all()
-    return render(request, 'hub/student_profile.html',{'Students': Students})
+def get_student_profile(request, id):
+    if request.user.profile.id == id:
+        return redirect('my-profile')
+    student = Student.objects.get(id=id)
+    student_skills = student.skills.all()
+    if student.team:
+        student_team = student.team.student_set.all().exclude(name=student.name)
+    else:
+        student_team = []
+    student_year = student.ORDINALS[student.year]
+    context = {'student': student, 'skills': student_skills,
+               'study_year': student_year, 'team': student_team}
+
+    return render(request, 'hub/student_profile.html',context)
 
 # Returns Advisor Home page
 def get_advisor_home(request):

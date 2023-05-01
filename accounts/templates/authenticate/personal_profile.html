@@ -64,13 +64,15 @@
 		<div class="dialog">
 			
 			<div class="team-members">
+				{% if team %}
 				<h3> Team: {{ user.profile.team.name }}</h3>
-				<h3> Members:</h3>
+				<h3>  Members:</h3>
 				<ul>
 				{% for member in team %}
-				 <li><a href="/profile">{{member}}</a></li>
+				 <li><a href="/hub/student-profile/{{member.id}}">{{member}}</a></li>
 				{% endfor %}
 				</ul>
+				{% endif%}
 			</div>
 		
             
