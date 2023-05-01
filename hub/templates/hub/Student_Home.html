@@ -96,5 +96,34 @@
 	  </div>
 	{% endfor %}
   </div>
+
+  <script>
+	
+	const dropdownBtn = document.querySelector("#myButton");
+	const dropdownContent = document.querySelector(".additional-buttons");
+
+		// Add a click event listener to the document object
+		document.addEventListener("click", function(e) {
+		// Check if the target of the click event is inside the dropdown or not
+		if (!dropdownBtn.contains(e.target) && !dropdownContent.contains(e.target)) {
+			// If the target is outside the dropdown, hide the dropdown content
+			dropdownContent.style.display = "none";
+		}
+		});
+
+		const dropdownBtn2 = document.querySelector("#myButton1");
+		const dropdownContent2 = document.querySelector(".additional-buttons1");
+
+		// Add a click event listener to the document object
+		document.addEventListener("click", function(e) {
+		// Check if the target of the click event is inside the dropdown or not
+		if (!dropdownBtn2.contains(e.target) && !dropdownContent2.contains(e.target)) {
+			// If the target is outside the dropdown, hide the dropdown content
+			dropdownContent2.style.display = "none";
+		}
+		});
+
+
+  </script>
 </body>
 </html>
