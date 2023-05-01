@@ -97,6 +97,8 @@ header {
 }
 
 .meetings .meeting h5{
+    overflow-wrap: break-word;
+    word-break: normal;
     font-size: 13px;
     margin-bottom: 0px;
     margin-top: 7px;
@@ -230,6 +232,7 @@ header {
   }
   */
   .days button.selected {
+    transition: 0.3s ease;
     background-color: #007bff;
     color: #fff;
   }
@@ -378,12 +381,16 @@ header {
   }
   
   .meeting-info-input #name {
-    width: 330px;
+    width: 280px;
     padding: 12px 20px;
     margin: 8px 0;
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
+  }
+
+  .meeting-info-input #name:focus {
+    outline: none;
   }
   /*
   .meeting-info-input #description {
@@ -416,6 +423,10 @@ header {
     resize: none;
   }
   
+  .meeting-info-input textarea:focus {
+    outline: none;
+  }
+
   .meeting-info-input .finalsubmit {
     display: flex;
     align-items: center;
