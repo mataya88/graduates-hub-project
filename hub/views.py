@@ -20,7 +20,7 @@ def get_skill_set(request):
 @login_required
 def get_schedule_meeting_page(request):
 
-    team = Team.objects.get(name="Bugs-Slayerz")
+    team = request.user.profile.team
     team_members = Student.objects.filter(team=team)
     
     # If this is a POST request, the user has submitted the form
@@ -45,7 +45,7 @@ def get_schedule_meeting_page(request):
             if members_available_str[i] == 'yes':
                 members_available_obj.append(student)
 
-        print(meeting_name, meeting_desc, date_obj, start_time, end_time, members_available_obj)
+        
 
         meeting = Meeting(title=meeting_name, description=meeting_desc, start_time=start_time, end_time=end_time,
                 date=date_obj, team=team)
@@ -76,7 +76,7 @@ def get_schedule_meeting_page(request):
 def get_occupancies(request):
     day_of_week = int(request.GET.get('dayOfWeek'))
     days = {0: 'Sun', 1: 'Mon', 2: 'Tue', 3: 'Wed', 4: 'Thu', 5: 'Fri', 6: 'Sat'}
-    team = Team.objects.get(name="Bugs-Slayerz")
+    team = request.user.profile.team
     members = Student.objects.filter(team=team)
     data = []
  
@@ -108,7 +108,7 @@ def get_calendar(request):
 @login_required
 def get_events(request):
     # Fetch the team
-    team = Team.objects.get(name="Bugs-Slayerz")
+    team = request.user.profile.team
 
     # Fetch the requested month and year
     year = int(request.GET.get('year'))
@@ -141,7 +141,7 @@ def get_events(request):
 # Also, updates the database with the occupancies that the user selected in the page
 @login_required
 def submit_courses(request):
-    student = Student.objects.get(name="Abdelrahman Hesham")
+    student = request.user.profile
     
  
     # If this is a POST request, the user has submitted the form
