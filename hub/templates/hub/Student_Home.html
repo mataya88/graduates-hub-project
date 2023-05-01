@@ -1,0 +1,97 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'hub/css/Student_Home.css' %}">
+</head>
+
+<body>
+    <header>
+		<div class="logo">
+			<img src="{% static 'hub/img/GraduatesHubLogo.png' %}" alt="Graduates Hub Logo">
+		</div>
+		<div class="title">
+			<h1 style="margin-left: 35%;">GRADUATES HUB</h1>
+			<p style="margin-left: 35%;">"Where career dream comes true"</p>
+		</div>
+		<img src="{% static 'hub/img/Profile_photo.png' %}" class="head-profile" width="60px" height="60px">
+        
+	</header>
+	<div class="topnav">
+		<a class="active" href="{% url 'student-home' %}" id="Home">Home
+		<a class="active" href="#MyTeam" id="myButton">My Team
+			<script>
+			  // Add click event listener to the main button
+			  document.getElementById("myButton").addEventListener("click", function() {
+				// Toggle the display property of the additional buttons container
+				var additionalButtons = document.querySelector(".additional-buttons");
+				additionalButtons.style.display = (additionalButtons.style.display === "none") ? "flex" : "none";
+			  });
+			</script>
+		<a class="active" href="#Schedule" id="myButton1">Schedule
+			
+		  
+			<script>
+			  // Add click event listener to the main button
+			  document.getElementById("myButton1").addEventListener("click", function() {
+				// Toggle the display property of the additional buttons container
+				var additionalButtons = document.querySelector(".additional-buttons1");
+				additionalButtons.style.display = (additionalButtons.style.display === "none") ? "flex" : "none";
+			  });
+			</script>
+		<a href="#contact">About Us</a>
+		<a href="{% url 'search-page' %}">Search</a>
+	  </div>
+	  <div class="additional-buttons">
+		<a href="{% url 'recommended' %}"><button>Recommended partners</button></a>
+		<a href="#"><button>Create/Edit Post</button></a>
+	  </div>
+	  <div class="additional-buttons1">
+		<a href="{% url 'calendar' %}"><button>calendar</button></a>
+		<a href="{% url 'new-meeting' %}"><button>Schedule a meeting</button></a>
+		<a href="{% url 'edit-courses' %}"><button>Edit Weekly hours</button></a>
+	  </div>
+	</div>
+    <h2 style="font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;font-size: large;font-weight: bold; margin-left: 10px;">Capstone Design Ideas 🞃</h2>
+	  <div class="main-content-container">
+		{% for Post in Posts %}
+		<div class="main-content-block">
+		  <h1>{{Post.title}}</h1>
+		  <p>{{Post.content}}</p>
+		  <button>Details</button>
+		</div>
+		{% endfor%}
+  </div>
+  <script>
+    // Scroll right button functionality
+    document.getElementById('scrollRightBtn').addEventListener('click', function() {
+      document.querySelector('.main-content-container').scrollBy({ left: 300, behavior: 'smooth' });
+    });
+  </script>
+
+<div class="main-content-container">
+	<div class="group-mem-block">
+		<u><h1>My Team Members:</h1></u>
+		<img src="{% static 'hub/img/Profile_photo.png' %}"alt="Icon 5">
+		<h2>Muataz Attaia</h2>
+		<img src="{% static 'hub/img/Profile_photo.png' %}" alt="Icon 6">
+		<h2>Abdelrahman Hesham</h2>
+		<img src="{% static 'hub/img/Profile_photo.png' %}" alt="Icon 7">
+		<h2>Abdulaziz Aldhafeeri</h2>
+	</div>
+	<div class="timeline">
+	{% for Meeting in Meetings %}
+	  <div class="timeline-event">
+		<div class="timeline-date">{{Meeting.date}}</div>
+		<h2>{{Meeting.title}}</h2>
+		<p>{{Meeting.description}}</p>
+		<p style="font-weight: bold;">From {{Meeting.start_time}} To {{Meeting.end_time}}</p>
+	  </div>
+	{% endfor %}
+  </div>
+</body>
+</html>
