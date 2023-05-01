@@ -1,5 +1,5 @@
 from django.db import models
-    
+from django.contrib.auth.models import User as AuthUser
 # Create your models here.
 
 
@@ -21,7 +21,8 @@ class User(models.Model):
     name = models.CharField(max_length=40)
     phone = models.PositiveIntegerField()
     bio = models.TextField(max_length=500)
-    photo = models.ImageField(default='default.png', upload_to='profile_pics/', blank=True)
+    photo = models.ImageField(default='default.png',
+                              upload_to='profile_pics/', blank=True)
     website = models.URLField(null=True, blank=True)
     email = models.EmailField()
 
@@ -37,7 +38,7 @@ class Notification(models.Model):
     status = models.CharField(max_length=1, choices=STATUSES)
     sender = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name='sent_notification')
-    receiver = models.ForeignKey(       
+    receiver = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name='received_notification')
 
 
@@ -58,6 +59,12 @@ class Student(User):
                      ('ENTJ', 'ENTJ'), ('ENFP', 'ENFP'), ('ENFJ', 'ENFJ'),
                      ('ESTP', 'ESTP'), ('ESTJ', 'ESTJ'), ('ESFP', 'ESFP'),
                      ('ESFJ', 'ESFJ')]
+
+    ORDINALS = {1: 'First', 2: 'Second', 3: 'Third', 4: 'Fourth', 5: 'Fifth',
+                6: 'Sixth', 7: 'Seventh', 8: 'Eighth', 9: 'Eighth', 10: 'tenth'}
+
+    auth_user = models.OneToOneField(
+        AuthUser, on_delete=models.CASCADE, related_name='profile')
 
     gender = models.CharField(max_length=1, choices=User.GENDERS)
     year = models.PositiveIntegerField()
@@ -132,7 +139,6 @@ class Image(models.Model):
     alt_text = models.CharField(max_length=200)
     line = models.PositiveIntegerField()
 
-   
 
 class Meeting(models.Model):
     title = models.CharField(max_length=30)
@@ -141,5 +147,7 @@ class Meeting(models.Model):
     end_time = models.TimeField()
     date = models.DateField()
     team = models.ForeignKey(Team, on_delete=models.CASCADE, null=False)
-    creator = models.ForeignKey(Student, on_delete=models.SET_NULL, null=True, related_name='meetings_created')
-    members_available = models.ManyToManyField('Student', blank=True, related_name='meetings_available')
+    creator = models.ForeignKey(
+        Student, on_delete=models.SET_NULL, null=True, related_name='meetings_created')
+    members_available = models.ManyToManyField(
+        'Student', blank=True, related_name='meetings_available')

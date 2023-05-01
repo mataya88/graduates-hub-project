@@ -3,7 +3,7 @@ from .models import *
 from django.http import JsonResponse
 from datetime import datetime, time
 import json
-
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -15,6 +15,7 @@ def get_skill_set(request):
 # Return the page schedule meetings with the team data and meetings data needed
 # Creates a meeting with the data the user specified in the page
 
+@login_required
 def get_schedule_meeting_page(request):
 
     team = Team.objects.get(name="Bugs-Slayerz")
@@ -69,6 +70,7 @@ def get_schedule_meeting_page(request):
     return render(request, 'hub/schedule_meeting.html', context)
 
 # A function to return occupancies of the team: Used in schedule meeting page to show occupied and unoccupied members for a meeting slot
+@login_required
 def get_occupancies(request):
     day_of_week = int(request.GET.get('dayOfWeek'))
     days = {0: 'Sun', 1: 'Mon', 2: 'Tue', 3: 'Wed', 4: 'Thu', 5: 'Fri', 6: 'Sat'}
@@ -94,12 +96,14 @@ def get_occupancies(request):
 
 
 # Returns the url of the calendar page
+@login_required
 def get_calendar(request):
 
     return render(request, 'hub/calendar.html')
 
 
 # Used by the calendar page to get events(meetings) in each day of a specific month and year for a student
+@login_required
 def get_events(request):
     # Fetch the team
     team = Team.objects.get(name="Bugs-Slayerz")
@@ -133,6 +137,7 @@ def get_events(request):
 
 # Return the edit courses page
 # Also, updates the database with the occupancies that the user selected in the page
+@login_required
 def submit_courses(request):
     student = Student.objects.get(name="Abdelrahman Hesham")
     
@@ -166,6 +171,7 @@ def submit_courses(request):
 
 
 # Returns project description page
+
 def get_project(request):
     return render(request, 'hub/Proj_desc.html')
 
@@ -175,11 +181,8 @@ def get_search(request):
     return render(request, 'hub/search_page.html')
 
 
-def get_profile(request):
-    return render()
+
 
 def handle_sponsorship():
     result = [{'name': 'ahmad', 'phone': '35353', '':''}]
 
-def get_student_profile(request):
-    return render(request, 'hub/student_profile.html')

@@ -18,36 +18,43 @@
 		</div>
 	</header>
 	<div class = "bar">
-        <h2>Company Profile</h2>
+        <h2>Student Profile</h2>
     </div>
 	<main>
         
         <div class="profile-info">
 		<div class="profile-title">
-            <h2> {{ user.name }}</h2>
-			<img src="company_profile.png" alt="Profile Photo">
+            <h2> {{ user.profile.name }}</h2>
+			<img src="" alt="Profile Photo">
 		</div>
 		<div class="fields">
-            <button>Request Sponsorship</button>
+            <button>Edit Profile</button>
             <div class="fields-info">
 			<div class="left">
-				<p>Industy: Technology</p>
-				<!--<p>Skills: Web Development, Graphic Design</p>
-				<p>Interests: Economy, Health</p>
-				<p>Personality Type: INFJ</p>-->
+				<p>Skills: 
+					<ul>
+					{% for skill in skills %}
+					 <li>{{skill}}</li> 
+					{% endfor %}
+					</ul>
+				</p>
 				
-				<p>Description: Our main focus is on networks.</p>
-				<p href="omahasolutions.com">Website: omahasolutions.com</p>
+				<p>Personality Type: {{user.profile.personality}}</p>
+				
+				<p>Description: {{user.profile.bio}}</p>
+				{% if user.profile.website %}
+				<p href="omahasolutions.com">Website: {{user.profile.website}}</p>
+				{% endif %}
 				
 			</div>
 			<div class="right">
-				<!--<p>Year of Study: Fourth Year</p>
-				-->
-				<p>Status: Hiring</p>
+				<p>Year of Study: {{study_year}} year</p>
+				
+			
 				
 				<p>Contact Info:</p>
-				<p>Email: example@gmail.com</p>
-				<p>Phone: 555-555-5555</p>
+				<p>Email: {{ user.profile.email }}</p>
+				<p>Phone: {{ user.profile.phone }}</p>
                 
 			</div>
         </div>
@@ -55,35 +62,36 @@
     </div>
 		
 		<div class="dialog">
-			<!--
+			
 			<div class="team-members">
-				<h3>Team Members</h3>
+				<h3> Team: {{ user.profile.team.name }}</h3>
+				<h3> Members:</h3>
 				<ul>
-					<li>Micheal Angelo</li>
-					<li>Leonardo Castello</li>
-					
+				{% for member in team %}
+				 <li><a href="/profile">{{member}}</a></li>
+				{% endfor %}
 				</ul>
 			</div>
-		-->
+		
             
             <div class="posts">
-            <h3>Job Oppurtinities</h3>
+            <h3>Recent Posts</h3>
 			<div class="post-boxes">
                 <div id="post1">
                     <!--<img src="team_work_photo.jpg" width="100px" height="80px">-->
                     <div class="post-info">
-                    <h4>Software Engineer</h4>
+                    <h4>Python Decorators</h4>
                     <p>
-                        Skills: Python, JavaScript.
+                        Decorators are a great tool in python.
                     </p>
                 </div>
                 </div>
                 <div id="post2">
                     <!--<img src="team_work_photo.jpg" width="100px" height="80px">-->
                     <div class="post-info">
-                    <h4>Data Analyst</h4>
+                    <h4>Team Work</h4>
                     <p>
-                        Skills: SQL, Python.
+                        Team work is very essential for success.
                     </p>
                 </div>
                 </div>
