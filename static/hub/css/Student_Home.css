@@ -177,10 +177,9 @@ header {
     border-radius: 10px;
     margin-left: 20px;
     margin-top: 40px;
-    background-color: rgb(42, 84, 65);
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
     text-align: center;
-    color: #fff;
+    color: #000000;
   }
   .group-mem-block img {
     width: 50px;

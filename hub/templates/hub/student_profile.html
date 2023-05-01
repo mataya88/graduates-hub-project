@@ -22,56 +22,30 @@
         
         <div class="profile-info">
 		<div class="profile-title">
+			<p></p>
 			<img src="{% static 'hub/img/Profile_photo.png' %}" alt="Profile Photo">
 		</div>
 		<div class="fields">
             <div class="fields-info">
 			<div class="left">
-				<p> Gender: Male</p>
-				<p>Skills: Web Development, Graphic Design</p>
-				<p>Interests: Economy, Health</p>
-				<p>Personality Type: INFJ</p>
+				<p>Name: {{Student.name}} </p>
+				<p>Gender: {{Student.gender}} </p>
+				<p>Skills: {{Student.skills}} </p>
+				<p>Personality Type: {{Student.Personality}} </p>
 				
 				
 			</div>
 			<div class="right">
-				<p>Year of Study: Fourth Year</p>
-
-				<p>Status: Working on design project</p>
-				
+				<p>Year of Study: {{Student.year}}</p>				
 				<p>Contact Info:</p>
-				<p>Email: example@gmail.com</p>
-				<p>Phone: 555-555-5555</p>
+				<p>Email: {{Student.email}}</p>
+				<p>Phone: {{Student.phone}}</p>
                 
 			</div>
         </div>
-		</div>
-    </div>
-		
-		<div class="dialog">
 
-			<div class="team-members">
-				<h3>Team Members</h3>
-				<ul>
-					<li>Micheal Angelo</li>
-					<li>Leonardo Castello</li>
-					
-				</ul>
-			</div>
-            
-            <div class="posts">
-            <h3>Recent Posts</h3>
-			<div class="post-boxes">
-                <div id="post1">
-                    <img src="{% static 'hub/img/mental.png' %}" width="100px" height="80px">
-                    <p>Team Work is an essential skill. 
-                        You must improve it</p>
-                    
-                </div>
-                </div>
-            </div>
-        </div>
-		</div>
+			
+        
 	</main>
 </body>
 </html>

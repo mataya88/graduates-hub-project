@@ -44,7 +44,7 @@
 			  });
 			</script>
 		<a href="#contact">About Us</a>
-		<input type="text" placeholder="Search..">
+		<a href="{% url 'search-page' %}">Search</a>
 	  </div>
 	  <div class="additional-buttons">
 		<a href="{% url 'recommended' %}"><button>Recommended partners</button></a>
@@ -81,7 +81,7 @@
 		<img src="{% static 'hub/img/Profile_photo.png' %}" alt="Icon 6">
 		<h2>Abdelrahman Hesham</h2>
 		<img src="{% static 'hub/img/Profile_photo.png' %}" alt="Icon 7">
-		<h2>Abdbuttonaziz Aldhafeeri</h2>
+		<h2>Abdulaziz Aldhafeeri</h2>
 	</div>
 	<div class="timeline">
 	{% for Meeting in Meetings %}

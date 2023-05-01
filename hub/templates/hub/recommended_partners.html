@@ -37,12 +37,13 @@
 		<tbody>
 		{% for Student in Students %}
 		  <tr>
-			<td><img src="{{ Student.photo.url }}" alt="Profile Picture" height="30px"></td>
+			<td><img src="{% static 'path/to/photo/directory/'|add:Student.photo %}" alt="Profile Picture" height="30px"></td>
 			<td>{{Student.name}}</td>
 			<td>{{Student.design_semester}}</td>
 			<td>{{Student.personality}}</td>
 			<td><button class="table-button-red">x</button></td>
 			<td><button class="table-button-green">✔</button></td>
+			<td><a href="{% url 'student-profile' %}" id="student_name"><button>View Profile</button></a></td>
 			
 		  </tr>
 		{% endfor %}

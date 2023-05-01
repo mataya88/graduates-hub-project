@@ -67,14 +67,14 @@ table {
 .table-button-red {
     border: 0;
     color: red;
-    background-color: transparent;
+    
 }
 
 /* CSS for Green Button */
 .table-button-green {
     border: 0;
     color: rgb(0, 255, 64);
-    background-color: transparent;
+    
 }
 
 table th,td {
