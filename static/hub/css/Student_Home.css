@@ -319,4 +319,7 @@ header {
         text-decoration: none;
         font-size: 17px;
     }
-    
+
+    .timeline > .meetings-head {
+      margin-left: 350px;
+    }

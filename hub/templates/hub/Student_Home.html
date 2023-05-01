@@ -58,7 +58,7 @@
 		<a href="{% url 'edit-courses' %}"><button>Edit Weekly hours</button></a>
 	  </div>
 	</div>
-    <h2 style="font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;font-size: large;font-weight: bold; margin-left: 10px;">Capstone Design Ideas 🞃</h2>
+    <h2 style="font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;font-size: large;font-weight: bold; margin-left: 10px;">Recent Posts 🞃</h2>
 	  <div class="main-content-container">
 		{% for Post in Posts %}
 		<div class="main-content-block">
@@ -78,7 +78,7 @@
 
 <div class="main-content-container">
 	<div class="group-mem-block">
-		{% if team_members %}
+		{% if members %}
 		<u><h1>My Team Members:</h1></u>
 		{% for member in members %}
 		<img src="{{member.photo.url}}"alt="Icon 5">
@@ -87,6 +87,7 @@
 		{% endif %}
 	</div>
 	<div class="timeline">
+		<h2 class="meetings-head"> Team Meetings </h2>
 	{% for Meeting in Meetings %}
 	  <div class="timeline-event">
 		<div class="timeline-date">{{Meeting.date}}</div>

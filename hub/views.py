@@ -195,8 +195,8 @@ def get_student_home(request):
             id=request.user.profile.id)
     else:
         team_members = []
-    posts = Post.objects.all().order_by('time')
-    meetings = Meeting.objects.all()
+    posts = Post.objects.all().order_by('-time')
+    meetings = Meeting.objects.all().order_by('-date')
     context = {'Posts': posts, 'Meetings': meetings, 'members': team_members}
     return render(request, 'hub/Student_Home.html', context)
 
