@@ -78,11 +78,13 @@
 
 <div class="main-content-container">
 	<div class="group-mem-block">
+		{% if team_members %}
 		<u><h1>My Team Members:</h1></u>
 		{% for member in members %}
 		<img src="{{member.photo.url}}"alt="Icon 5">
 		<a href="/hub/student-profile/{{member.id}}"><h2>{{member.name}}</h2></a>
 		{% endfor %}
+		{% endif %}
 	</div>
 	<div class="timeline">
 	{% for Meeting in Meetings %}

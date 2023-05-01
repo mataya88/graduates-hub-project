@@ -17,12 +17,13 @@ def get_skill_set(request):
 # Return the page schedule meetings with the team data and meetings data needed
 # Creates a meeting with the data the user specified in the page
 
+
 @login_required
 def get_schedule_meeting_page(request):
 
     team = request.user.profile.team
     team_members = Student.objects.filter(team=team)
-    
+
     # If this is a POST request, the user has submitted the form
     if request.method == 'POST':
         # Retrieve the data from the form
@@ -45,52 +46,51 @@ def get_schedule_meeting_page(request):
             if members_available_str[i] == 'yes':
                 members_available_obj.append(student)
 
-        
-
         meeting = Meeting(title=meeting_name, description=meeting_desc, start_time=start_time, end_time=end_time,
-                date=date_obj, team=team)
+                          date=date_obj, team=team)
 
         meeting.save()
 
         meeting.members_available.add(*members_available_obj)
 
-
         # Return a response to the user
         return redirect('calendar')
 
-    
     meetingsObj = Meeting.objects.filter(team=team)
 
     meetings = []
     for meeting in meetingsObj:
         meetings.append({"title": meeting.title, "description": meeting.description, "date": meeting.date,
-        "start_time": meeting.start_time.strftime('%I:%M %p'), "end_time": meeting.end_time.strftime('%I:%M %p'), 
-        "members_available": meeting.members_available})
+                         "start_time": meeting.start_time.strftime('%I:%M %p'), "end_time": meeting.end_time.strftime('%I:%M %p'),
+                         "members_available": meeting.members_available})
 
     context = {"team_members": team_members, "meetings": meetings}
- 
+
     return render(request, 'hub/schedule_meeting.html', context)
 
 # A function to return occupancies of the team: Used in schedule meeting page to show occupied and unoccupied members for a meeting slot
+
+
 @login_required
 def get_occupancies(request):
     day_of_week = int(request.GET.get('dayOfWeek'))
-    days = {0: 'Sun', 1: 'Mon', 2: 'Tue', 3: 'Wed', 4: 'Thu', 5: 'Fri', 6: 'Sat'}
+    days = {0: 'Sun', 1: 'Mon', 2: 'Tue',
+            3: 'Wed', 4: 'Thu', 5: 'Fri', 6: 'Sat'}
     team = request.user.profile.team
     members = Student.objects.filter(team=team)
     data = []
- 
+
     for member in members:
         occ = []
         if day_of_week in (0, 1, 2, 3, 4):
-        
+
             occupancies = member.occupancies.filter(day=days[day_of_week])
             for oc in occupancies:
                 occ.append({'start': oc.start_time, 'end': oc.end_time})
-                
+
         data.append(occ)
 
-    #while len(data) < 4:
+    # while len(data) < 4:
      #   data.append([])
 
     print(data)
@@ -118,11 +118,12 @@ def get_events(request):
     print(month)
 
     # Get the meetings data for every day in that month and year
-    
+
     data = []
-    
+
     for day in range(1, 31):
-        day_meetings = Meeting.objects.filter(team= team, date__year=year, date__month=month+1, date__day=day)
+        day_meetings = Meeting.objects.filter(
+            team=team, date__year=year, date__month=month+1, date__day=day)
         day_data = {}
         i = 0
         for meeting in day_meetings:
@@ -132,8 +133,7 @@ def get_events(request):
             i += 1
 
         data.append(day_data)
-    
- 
+
     return JsonResponse(data, safe=False)
 
 
@@ -142,8 +142,7 @@ def get_events(request):
 @login_required
 def submit_courses(request):
     student = request.user.profile
-    
- 
+
     # If this is a POST request, the user has submitted the form
     if request.method == 'POST':
         # Retrieve the data from the form input (name="slots")
@@ -156,20 +155,19 @@ def submit_courses(request):
             day = slot["day"]
             start = datetime.strptime(slot["start"], '%H:%M').time()
             end = datetime.strptime(slot["end"], '%H:%M').time()
-            occupancy = Occupancy.objects.get(day=day, start_time=start, end_time=end)
+            occupancy = Occupancy.objects.get(
+                day=day, start_time=start, end_time=end)
             occupancies_obj.append(occupancy)
-        
+
         print(occupancies_obj)
 
         student.occupancies.set(occupancies_obj)
-
 
         # Return a response to the user
         return redirect('calendar')
 
     # If this is a GET request, render the form HTML template
     return render(request, 'hub/weekly_courses.html')
-
 
 
 # Returns project description page
@@ -179,25 +177,32 @@ def get_project(request):
 
 # Returns search page
 
+
 def get_search(request):
     return render(request, 'hub/search_page.html')
 
 
-
-
 def handle_sponsorship():
-    result = [{'name': 'ahmad', 'phone': '35353', '':''}]
+    result = [{'name': 'ahmad', 'phone': '35353', '': ''}]
 
 # Returns Student Home page
+
+
 @login_required
 def get_student_home(request):
-    team_members = request.user.profile.team.student_set.all().exclude(id=request.user.profile.id)
+    if request.user.profile.team:
+        team_members = request.user.profile.team.student_set.all().exclude(
+            id=request.user.profile.id)
+    else:
+        team_members = []
     posts = Post.objects.all().order_by('time')
     meetings = Meeting.objects.all()
     context = {'Posts': posts, 'Meetings': meetings, 'members': team_members}
     return render(request, 'hub/Student_Home.html', context)
 
 # Returns Recommended Partners (Students) page
+
+
 @login_required
 def get_recommended_partners(request):
 
@@ -209,21 +214,21 @@ def get_recommended_partners(request):
     missed_skill_fields = [skill.field for skill in list(
         Skill.objects.exclude(field__in=student_skills_fields))]
 
-
     # students that have more skills in other fields will have more prioriy
     recommended_students = (Student.objects
-        .filter(
-            personality__in=student.COMPATIBILITY_MATRIX[student.personality])
-        .exclude(name=student.name)
-        
-        .filter(skills__field__in=missed_skill_fields)
-        .annotate(priority=Count('skills'))
-        .order_by('-priority'))
+                            .filter(
+                                personality__in=student.COMPATIBILITY_MATRIX[student.personality])
+                            .exclude(name=student.name)
+
+                            .filter(skills__field__in=missed_skill_fields)
+                            .annotate(priority=Count('skills'))
+                            .order_by('-priority'))
     print(recommended_students)
-    
+
     # filter Users and Students by compatible personalities
-    
+
     return render(request, 'hub/recommended_partners.html', {'Students': recommended_students})
+
 
 def get_student_profile(request, id):
     if request.user.profile.id == id:
@@ -238,16 +243,18 @@ def get_student_profile(request, id):
     context = {'student': student, 'skills': student_skills,
                'study_year': student_year, 'team': student_team}
 
-    return render(request, 'hub/student_profile.html',context)
+    return render(request, 'hub/student_profile.html', context)
 
 # Returns Advisor Home page
+
+
 def get_advisor_home(request):
     Posts = Post.objects.all()
-    return render(request, 'hub/advisor_home.html',{'Posts':Posts})
+    return render(request, 'hub/advisor_home.html', {'Posts': Posts})
 
 # Returns Company Home page
+
+
 def get_company_home(request):
     Posts = Post.objects.all()
-    return render(request, 'hub/company_home.html',{'Posts':Posts})
-
-
+    return render(request, 'hub/company_home.html', {'Posts': Posts})
