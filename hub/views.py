@@ -189,10 +189,12 @@ def handle_sponsorship():
     result = [{'name': 'ahmad', 'phone': '35353', '':''}]
 
 # Returns Student Home page
+@login_required
 def get_student_home(request):
+    team_members = request.user.profile.team.student_set.all().exclude(id=request.user.profile.id)
     posts = Post.objects.all().order_by('time')
     meetings = Meeting.objects.all()
-    context = {'Posts': posts, 'Meetings': meetings}
+    context = {'Posts': posts, 'Meetings': meetings, 'members': team_members}
     return render(request, 'hub/Student_Home.html', context)
 
 # Returns Recommended Partners (Students) page

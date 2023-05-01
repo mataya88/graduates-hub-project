@@ -79,12 +79,10 @@
 <div class="main-content-container">
 	<div class="group-mem-block">
 		<u><h1>My Team Members:</h1></u>
-		<img src="{% static 'hub/img/Profile_photo.png' %}"alt="Icon 5">
-		<h2>Muataz Attaia</h2>
-		<img src="{% static 'hub/img/Profile_photo.png' %}" alt="Icon 6">
-		<h2>Abdelrahman Hesham</h2>
-		<img src="{% static 'hub/img/Profile_photo.png' %}" alt="Icon 7">
-		<h2>Abdulaziz Aldhafeeri</h2>
+		{% for member in members %}
+		<img src="{{member.photo.url}}"alt="Icon 5">
+		<a href="/hub/student-profile/{{member.id}}"><h2>{{member.name}}</h2></a>
+		{% endfor %}
 	</div>
 	<div class="timeline">
 	{% for Meeting in Meetings %}
