@@ -1,0 +1,83 @@
+body {
+	font-family: Arial, sans-serif;
+	margin: 0;
+    background-color: rgb(245, 245, 245);
+    
+}
+
+
+
+header {
+	display: flex;
+	justify-content: space-between;
+	height: 80px;
+	background-color: rgb(245, 245, 245);
+	padding: 10px 0px 20px 0px;
+	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.head-profile {
+    margin: 15px;
+}
+.bar {
+    background-color: grey;
+    
+}
+.bar h2 {
+    color: white;
+    margin:0px;
+    padding: 20px;
+    font-size: 45px;
+}
+
+.logo {
+	flex: 1;
+    padding: 0;
+}
+
+.logo img {
+	height: 100px;
+}
+
+.title {
+	flex: 2;
+	text-align: left;
+    margin: 15px;
+}
+
+.title h1 {
+	margin: 0;
+	font-size: 36px;
+	font-weight: bold;
+}
+
+.title p {
+	margin: 0;
+    margin-left: 30px;
+	font-size: 18px;
+	color: gray;
+}
+
+table {
+    text-align: center;
+    margin: 15vw;
+    margin-top: 10vh;
+    margin-bottom: 10vh;
+}
+.table-button-red {
+    border: 0;
+    color: red;
+    
+}
+
+/* CSS for Green Button */
+.table-button-green {
+    border: 0;
+    color: rgb(0, 255, 64);
+    
+}
+
+table th,td {
+    padding: 20px;
+}
+

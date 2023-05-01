@@ -1,0 +1,74 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'hub/css/advisor_home.css' %}">
+</head>
+
+<body>
+    <header>
+		<div class="logo">
+			<img src="{% static 'hub/img/GraduatesHubLogo.png' %}" alt="Graduates Hub Logo">
+		</div>
+		<div class="title">
+			<h1>GRADUATES HUB</h1>
+			<p>"Where career dream comes true"</p>
+		</div>
+		<img src="{% static 'hub/img/Profile_photo.png' %}" class="head-profile" width="60px" height="60px">
+	</header>
+	<div class="topnav">
+    <a href="#Create/Edit-Posts">Create/Edit-Posts</a>
+		<a href="#contact">About Us</a>
+    <a href="{% url 'search-page' %}">Search</a>
+	  </div>
+    <h2 style="font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;font-size: large;font-weight: bold; margin-left: 10px;">Capstone Design Ideas 🞃</h2>
+	  <div class="main-content-container">
+		{% for Post in Posts %}
+		<div class="main-content-block">
+		  <h1>{{Post.title}}</h1>
+		  <p>{{Post.content}}</p>
+		  <button>Details</button>
+		</div>
+		{% endfor%}
+  </div>
+  <script>
+    // Scroll right button functionality
+    document.getElementById('scrollRightBtn').addEventListener('click', function() {
+      document.querySelector('.main-content-container').scrollBy({ left: 300, behavior: 'smooth' });
+    });
+  </script>
+
+<u><h3 style="margin-left: 60%;font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;font-size: large;font-weight: bold; margin-top: 0%;">Companies Offers</h3></u>
+<div class="timeline">
+  <div class="timeline-event">
+    <div class="timeline-date">14 Jan 2023</div>
+    <h2>Data Analyst</h2>
+    <p>Skills required:
+        1-2 years professional experience related to Database compliance and Security Monitoring
+    </p>
+    <button>Accept</button>
+  <button>Deny</button>
+  </div>
+  <div class="timeline-event">
+    <div class="timeline-date">13 Feb 2023</div>
+    <h2>Web Development</h2>
+    <p>Skills required:
+        2-4 years of experience in systems and information security administration</p>
+        <button>Accept</button>
+        <button>Deny</button>
+  </div>
+  <div class="timeline-event">
+    <div class="timeline-date">22 Feb 2023</div>
+    <h2>Cyber Security Engineer</h2>
+    <p>Skills required:
+        2+ years Database activity and structure data access monitoring and policy experience (e.g. IBM Guardium, Imperva, Managed Engine, etc.)</p>
+        <button>Accept</button>
+        <button>Deny</button>
+  </div>
+</div>
+</body>
+</html>
