@@ -8,11 +8,13 @@
 <body>
 	<header>
 		<div class="logo">
-			<img src="{% static 'hub/img/GraduatesHubLogo.png' %}" alt="Graduates Hub Logo">
+			<div class="logo">
+				<img src="{% static 'hub/img/GraduatesHubLogo.png' %}" alt="Graduates Hub Logo">
+			</div>
 		</div>
 		<div class="title">
-			<h1>GRADUATES HUB</h1>
-			<p>"Where career dream comes true"</p>
+			<h1>Graduates Hub</h1>
+			<p>Where career dreams come true</p>
 		</div>
 	</header>
 	<div class = "bar">
@@ -23,7 +25,7 @@
         <div class="profile-info">
 		<div class="profile-title">
             <h2> {{ user.profile.name }}</h2>
-			<img src="" alt="Profile Photo">
+			<img src="{{ user.profile.photo.url}}" alt="Profile Photo">
 		</div>
 		<div class="fields">
             <button>Edit Profile</button>

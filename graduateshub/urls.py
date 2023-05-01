@@ -19,6 +19,9 @@ from django.urls import path, include
 import debug_toolbar
 from django.contrib.auth import views as auth_views
 from accounts import views as accounts_views
+from django.conf import settings
+from django.conf.urls.static import static
+
 admin.site.site_header = "GraduatesHub Administration"
 admin.site.site_title = "GraduatesHub Admin"
 admin.site.index_title = "Database Administration Page"
@@ -34,4 +37,7 @@ urlpatterns = [
     path('logout/', auth_views.LogoutView.as_view(template_name='authenticate/logout.html'), name='logout'),
     path('profile/me', accounts_views.profile, name='my-profile')
 
-]
+] 
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT )
