@@ -4,6 +4,7 @@ from django.http import JsonResponse
 from datetime import datetime, time
 import json
 
+
 # Create your views here.
 
 def get_skill_set(request):
@@ -169,11 +170,16 @@ def get_project(request):
     return render(request, 'hub/Proj_desc.html')
 
 # Returns search page
+
 def get_search(request):
     return render(request, 'hub/search_page.html')
+
 
 def get_profile(request):
     return render()
 
 def handle_sponsorship():
     result = [{'name': 'ahmad', 'phone': '35353', '':''}]
+
+def get_student_profile(request):
+    return render(request, 'hub/student_profile.html')
