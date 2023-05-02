@@ -219,7 +219,7 @@ def get_recommended_partners(request):
                             .filter(
                                 personality__in=student.COMPATIBILITY_MATRIX[student.personality])
                             .exclude(name=student.name)
-
+                            .exclude(team=student.team)
                             .filter(skills__field__in=missed_skill_fields)
                             .annotate(priority=Count('skills'))
                             .order_by('-priority'))
