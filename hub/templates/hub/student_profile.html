@@ -4,6 +4,8 @@
 <head>
 	<title>Graduates Hub</title>
 	<link rel="stylesheet" type="text/css" href="{% static 'hub/css/student_profile.css' %}">
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js">
+	</script>
 </head>
 <body>
 	<header>
@@ -29,13 +31,23 @@
 			<img src="{{ student.photo.url}}" alt="Profile Photo">
 		</div>
 		<div class="fields">
+			{% if not team or not user.profile.team %}
+			<form class="team-request-form" id="team-request-form">
+				{% csrf_token %}
+			<input style="display:none;" readonly="readonly" class="form-control" id="student-id" placeholder="student-id" value="{{student.id}}"/>
+			
+			<button type='submit' id="team-request-button">
 			{% if team and not user.profile.team %}
-            <button>Request to join team</button>
+            Request to join team
 			{% elif not team and user.profile.team %}
-			<button>Invite to join team</button>
+			Invite to join team
 			{% elif not team and not user.profile.team %}
-			<button>Request to create team</button>
+			Request to create team
+			{% endif %}</button>
+			<h5 class="text-success text-center"></h5>
+			</form>
 			{% endif %}
+		
             <div class="fields-info">
 			<div class="left">
 				<p>Skills: 
@@ -111,5 +123,22 @@
         </div>
 		</div>
 	</main>
+	<script type="text/javascript">
+		$(document).on('submit','#team-request-form', function(e) {
+			e.preventDefault();
+			$.ajax({
+				type: "POST",
+				url:'/hub/team-request/',
+				data: {
+					requested_student_id: $('#student-id').val(),
+					csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+				},
+				success: function(data) {
+					$("h5").html(data);
+				}
+			})
+		})
+		
+	</script>
 </body>
 </html>

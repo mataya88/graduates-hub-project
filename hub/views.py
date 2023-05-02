@@ -4,7 +4,7 @@ from django.http import JsonResponse
 from datetime import datetime, time
 import json
 from django.contrib.auth.decorators import login_required
-from django.db.models import Count
+from django.db.models import Count, Q
 
 
 # Create your views here.
@@ -216,10 +216,10 @@ def get_recommended_partners(request):
 
     # students that have more skills in other fields will have more prioriy
     recommended_students = (Student.objects
+                            .exclude(name=student.name)
+                            .exclude(Q(team=student.team) & ~ Q(team__isnull=True))
                             .filter(
                                 personality__in=student.COMPATIBILITY_MATRIX[student.personality])
-                            .exclude(name=student.name)
-                            .exclude(team=student.team)
                             .filter(skills__field__in=missed_skill_fields)
                             .annotate(priority=Count('skills'))
                             .order_by('-priority'))
@@ -258,3 +258,30 @@ def get_advisor_home(request):
 def get_company_home(request):
     Posts = Post.objects.all()
     return render(request, 'hub/company_home.html', {'Posts': Posts})
+
+@login_required
+def post_team_request(request):
+    if request.method == 'POST':
+        
+        requested_student = Student.objects.get(id=request.POST['requested_student_id'])
+        user_profile = request.user.profile
+
+        if requested_student.team and not user_profile.team:
+            request_notification = Notification(title="Team Join Request", description=f"{user_profile.name} wants to join your team.", sender=user_profile, receiver=requested_student, status="S", links=" ")
+        elif not requested_student.team and user_profile.team:
+            pronoun = 'his'
+            if user_profile.gender == "F":
+                pronoun = 'her'
+
+            request_notification = Notification(title="Team Join Invite", description=f"{user_profile.name} wants you to join {pronoun} team.", sender=user_profile, receiver=requested_student, status="S", links=" ")
+            
+        elif not requested_student.team and not user_profile.team:
+            request_notification = Notification(title="Team Request", description=f"{user_profile.name} wants to create a team with you.", sender=user_profile, receiver=requested_student, status="S", links=" ")
+        else:
+            failed = "There was a problem in sending the request."
+            return HttpResponse(failed, status_code=400)
+        
+        request_notification.save()
+
+        success = "Team request sent successfully"
+        return HttpResponse(success)

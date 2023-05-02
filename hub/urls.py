@@ -17,4 +17,5 @@ urlpatterns =  [path("allSkills/", views.get_skill_set),
                 path("student-profile/<int:id>/", views.get_student_profile, name='student-profile'),
                 path("advisor-home/", views.get_advisor_home, name='advisor-home'),
                 path("company-home/", views.get_company_home, name='company-home'),
+                path("team-request/", views.post_team_request, name='team-request')
                 ]  #+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT )
