@@ -195,9 +195,11 @@ def get_student_home(request):
             id=request.user.profile.id)
     else:
         team_members = []
+    
+    notifications = Notification.objects.filter(receiver=request.user.profile, status="S").prefetch_related('sender')
     posts = Post.objects.all().order_by('-time')
     meetings = Meeting.objects.all().order_by('-date')
-    context = {'Posts': posts, 'Meetings': meetings, 'members': team_members}
+    context = {'Posts': posts, 'Meetings': meetings, 'members': team_members, 'notifications': notifications}
     return render(request, 'hub/Student_Home.html', context)
 
 # Returns Recommended Partners (Students) page
@@ -222,6 +224,7 @@ def get_recommended_partners(request):
                                 personality__in=student.COMPATIBILITY_MATRIX[student.personality])
                             .filter(skills__field__in=missed_skill_fields)
                             .annotate(priority=Count('skills'))
+                            .select_related('design_semester')
                             .order_by('-priority'))
     print(recommended_students)
 
@@ -279,9 +282,45 @@ def post_team_request(request):
             request_notification = Notification(title="Team Request", description=f"{user_profile.name} wants to create a team with you.", sender=user_profile, receiver=requested_student, status="S", links=" ")
         else:
             failed = "There was a problem in sending the request."
-            return HttpResponse(failed, status_code=400)
+            return HttpResponse(failed, status=400)
         
         request_notification.save()
 
         success = "Team request sent successfully"
         return HttpResponse(success)
+
+@login_required
+def accept_team_request(request):
+    if request.method == "POST":
+        request_sender = Student.objects.get(id=request.POST['request_sender'])
+        request_receiver = request.user.profile
+        notification = Notification.objects.get(id=request.POST['notification'])
+        if request_sender.team and not request_receiver.team:
+            request_sender.team.student_set.add(request_receiver)
+            notification.status = "R"
+            notification.save()
+        elif not request_sender.team and request_receiver.team:
+            request_receiver.team.student_set.add(request_sender)
+            notification.status = "R"
+            notification.save()
+        elif not request_sender.team and not request_receiver.team:
+            new_team = Team(name="Design Team")
+            new_team.save()
+            new_team.student_set.add(request_receiver)
+            new_team.student_set.add(request_sender)
+            notification.status = "R"
+            notification.save()
+        else:
+            error = "Request could not be accepted"
+            return HttpResponse(error, status=400)
+        
+        success = "Request accepted successfully"
+        return HttpResponse(success)
+
+@login_required
+def dismiss_notification(request):
+    if request.method == "POST":
+        notification = Notification.objects.get(id=request.POST['notification'])
+        notification.status = "D"
+        notification.save()
+        return HttpResponse()

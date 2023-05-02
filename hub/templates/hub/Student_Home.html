@@ -7,6 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Graduates Hub</title>
     <link rel="stylesheet" type="text/css" href="{% static 'hub/css/Student_Home.css' %}">
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js">
+	</script>
 </head>
 
 <body>
@@ -47,7 +49,35 @@
 			</script>
 		<a href="#contact">About Us</a>
 		<a href="{% url 'search-page' %}">Search</a>
+		
+	  <div class="notifications-dropdown">
+		<button onclick="myFunction()" class="notifications-dropbtn">Notifications</button>
+		
 	  </div>
+	  
+	  <script>
+		// script for notifications dropdown
+		/* When the user clicks on the button, 
+		toggle between hiding and showing the dropdown content */
+		function myFunction() {
+		  document.getElementById("myDropdown").classList.toggle("show-notifications");
+		}
+		
+		// Close the dropdown if the user clicks outside of it
+		window.onclick = function(event) {
+		  if (!event.target.matches('.notifications-dropbtn')) {
+			var dropdowns = document.getElementsByClassName("notifications-content");
+			var i;
+			for (i = 0; i < dropdowns.length; i++) {
+			  var openDropdown = dropdowns[i];
+			  if (openDropdown.classList.contains('show-notifications')) {
+				openDropdown.classList.remove('show-notifications');
+			  }
+			}
+		  }
+		}
+		</script>
+	</div>
 	  <div class="additional-buttons">
 		<a href="{% url 'recommended' %}"><button>Recommended partners</button></a>
 		<a href="#"><button>Create/Edit Post</button></a>
@@ -58,6 +88,65 @@
 		<a href="{% url 'edit-courses' %}"><button>Edit Weekly hours</button></a>
 	  </div>
 	</div>
+	<div id="myDropdown" class="notifications-content">
+		{% if not notifications %}
+		<h5> You have no new notifications 🍵</h5>
+		{% endif %}
+		{% for not in notifications %}
+			<div class="notification-item">
+				<h3>{{not.title}}</h3>
+				<a href="/hub/student-profile/{{not.sender.id}}">Sender: {{not.sender}}</a>
+				<p>{{not.description}}</p>
+				<div class="notification-buttons">
+				<form class="accept-notification-{{not.id}}" id="accept-notification-{{not.id}}">
+					{% csrf_token %}
+				<button type='submit' id="accept-notification-button">Accept</button>
+				<h5 class="text-success text-center"></h5>
+				</form>
+				<script type="text/javascript">
+					$(document).on('submit','#accept-notification-{{not.id}}', function(e) {
+						$.ajax({
+							
+							type: "POST",
+							url:'/hub/accept-team-request/',
+							data: {
+								request_sender: parseInt('{{not.sender.id}}'),
+								notification: parseInt('{{not.id}}'),
+								csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+							},
+							success: function(data) {
+								alert(data);
+							},
+							error: function(err) {
+								alert(err.responseText);
+							}
+						})
+					})
+					
+				</script>
+				<form class="dismiss-notification-{{not.id}}" id="dismiss-notification-{{not.id}}">
+					{% csrf_token %}
+				<button type="submit" id="dismiss-notification-button">Dismiss</button>
+				<script type="text/javascript">
+					$(document).on('submit','#dismiss-notification-{{not.id}}', function(e) {
+						$.ajax({
+							type: "POST",
+							url:'/hub/dismiss-notification/',
+							data: {
+								notification: parseInt('{{not.id}}'),
+								csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+							},
+							success: function(data) {
+							}
+						})
+					})
+					
+				</script>
+				</form>
+			</div>
+			</div>
+		{% endfor %}
+		</div>
     <h2 style="font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;font-size: large;font-weight: bold; margin-left: 10px;">Recent Posts 🞃</h2>
 	  <div class="main-content-container">
 		{% for Post in Posts %}
@@ -126,5 +215,6 @@
 
 
   </script>
+  
 </body>
 </html>
