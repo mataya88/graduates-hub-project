@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Graduates Hub</title>
     <link rel="stylesheet" type="text/css" href="{% static 'hub/css/Student_Home.css' %}">
-	
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js">
 	</script>
 </head>
@@ -51,7 +51,20 @@
 			  });
 			</script>
 		<a href="#contact">About Us</a>
-		<a href="{% url 'search-page' %}">Search</a>
+
+		<form method="post" action="{% url 'search-page' %}" class="second-container" id="search-form" >
+			{% csrf_token %}
+			<div class="search-box">
+			  <input type="search" class="search-input" name="searched" placeholder="Search..." value="{{searched}}">
+			</div>
+			
+			<button type="submit" class="submit-button">
+				<i class="fa fa-search" style="font-size:24px; color:black"></i>
+			</button>
+
+			
+		</form>
+		<!--<a href="{% url 'search-page' %}">Search</a> -->	
 		
 	  <div class="notifications-dropdown">
 		<button onclick="myFunction()" class="notifications-dropbtn">Notifications</button>
@@ -219,6 +232,24 @@
 
   </script>
   	<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+
+	<script>
+		// get search submit button
+		const searchButton = document.querySelector(".submit-button");
+		const searchForm = document.getElementById('search-form');
+		const noResultsMsg = document.querySelector(".no-results");
+
+		searchButton.addEventListener("click", function(e){
+			e.preventDefault();
+
+			searchForm.submit();
+
+
+		});
+		
+
+	</script>
+
 
   
 </body>
