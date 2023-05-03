@@ -64,11 +64,16 @@ input{
 
 .submit-button{
     position: relative;
+    border-top: none;
+    border-bottom: none;
+    border-right: none;
+    background-color: white;
     border-left-style: solid;
     border-left-color: black;
     border-left-width: 2px;
     padding-left: 10px;
     height: 30px;
+    cursor: pointer;
     
 }
 
@@ -76,6 +81,20 @@ input{
     display: flex;
     height: 60px;
  
+}
+
+.after-search .display-query{
+    max-width: 800px;
+ 
+}
+.after-search .display-query h2{
+    max-width: 800px;
+    text-overflow: ellipsis;
+    display: inline;
+    overflow: hidden;
+    white-space: nowrap;
+      
+
 }
 
  .sort {
@@ -223,6 +242,81 @@ input{
     border-width: 1px;
     
 }   
+
+.search-results a{
+    display: flex;
+    text-decoration: none;
+}
+
+.search-results img{
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+
+    border-radius: 50%;
+    margin-right: 1rem;
+}
+
+.result{
+    display: flex;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    width: 100%;
+    height: 80px;
+    box-sizing: border-box;
+    padding: 10px 10px;
+    background-color: white ;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border: 1px solid #ddd;
+    cursor: pointer;
+}
+
+.result:hover{
+    background-color: #e5e5e5;
+    transition: 0.3s ease;
+}
+
+.result .info{
+    width: 100%;
+}
+.result #name{
+    color: black;
+    font-size: 16px;
+    margin-top: 0px;
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+.result #bio{
+    margin: 0px;
+    font-size: 13px;
+    text-overflow: ellipsis;
+    white-space: normal;
+    overflow: hidden;
+    max-height: 40px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    color: #777777;
+
+}
+.result #industry {
+    font-size: 13px;
+}
+
+.no-results{
+    text-align: center;
+    margin-top: 100px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    color: #363636;
+
+}
+
+.no-results h3{
+    padding: 20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-wrap:break-word;
+}
 
 .bar h2 {
     color: white;

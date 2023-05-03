@@ -28,10 +28,11 @@
 		<a class="active" href="#MyTeam" id="myButton">My Team
 			<script>
 			  // Add click event listener to the main button
-			  document.getElementById("myButton").addEventListener("click", function() {
+			  document.getElementById("myButton").addEventListener("click", function(e) {
+				e.preventDefault();
 				// Toggle the display property of the additional buttons container
 				var additionalButtons = document.querySelector(".additional-buttons");
-				additionalButtons.style.display = (additionalButtons.style.display === "none") ? "flex" : "none";
+				additionalButtons.style.display = additionalButtons.style.display === "flex" ? "none" : "flex";
 			  });
 			</script>
 		<a class="active" href="#Schedule" id="myButton1">Schedule
@@ -39,10 +40,11 @@
 		  
 			<script>
 			  // Add click event listener to the main button
-			  document.getElementById("myButton1").addEventListener("click", function() {
+			  document.getElementById("myButton1").addEventListener("click", function(e) {
+				e.preventDefault();
 				// Toggle the display property of the additional buttons container
 				var additionalButtons = document.querySelector(".additional-buttons1");
-				additionalButtons.style.display = (additionalButtons.style.display === "none") ? "flex" : "none";
+				additionalButtons.style.display = additionalButtons.style.display === "flex" ? "none" : "flex";
 			  });
 			</script>
 		<a href="#contact">About Us</a>

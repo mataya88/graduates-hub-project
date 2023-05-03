@@ -5,7 +5,8 @@
 	<title>Graduates Hub</title>
 	<link rel="stylesheet" type="text/css" href="{% static 'hub/css/search_page.css' %}">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
 </head>
 <body> 
 	<header>
@@ -20,30 +21,31 @@
 	</header>
 
 	<div class="container">
-		<div class="second-container">
-			<div class="filter-dropdown">
-				
-				
-			</div>
+		<form method="post" action="{% url 'search-page' %}" class="second-container" id="search-form" >
+			{% csrf_token %}
 			<div class="search-box">
-				
-				<input type="search" class="search-input" placeholder="Search...">
-				
+			  <input type="search" class="search-input" name="searched" placeholder="Search..." value="{{searched}}">
 			</div>
-			<div class="submit-button">
-					<a href="#"> 
-						<i class="fa fa-search" style="font-size:24px; color:black"></i>
-					</a>
-			</div>
+			
+			<button type="submit" class="submit-button">
+				<i class="fa fa-search" style="font-size:24px; color:black"></i>
+			</button>
 
-		</div>
+			<!--<input type="hidden" name="filter" value="All">-->
+			
+		  </form>
 	</div>
         
 	
   
 	<div class="after-search">
-		<div>
-			<h2>Search results for...</h2>
+		<div class="display-query">
+			{% if searched %}
+			<h2>Search results for {{searched}}</h2>
+
+			{% else %}
+			<h2>Hey! You Forgot To Search...</h2>
+			{%endif %}
 		</div>
 		
 		<div class="sort">
@@ -70,13 +72,68 @@
 			  <li><a href="#" class="active">All</a></li>
 			  <li><a href="#">People</a></li>
 			  <li><a href="#">Companies</a></li>
-			  <li><a href="#">Projects</a></li>
+			  <li><a href="#">Posts</a></li>
 			  <li><a href="#">Jobs</a></li>
 			</ul>
 		  </div>
 		  
 		<div class="search-results">
+			{% if results %}
+			{% for result in results %}
+				{% if result.type == 'Student'%}
+				
+					<div class="result" id="people">
+						<a href="/hub/student-profile/{{result.object.id}}">
+							<img src="{{result.object.photo.url}}">
+							<div class="info">
+								<p id="name">{{result.object.name}}</p>
+								<p id="bio">{{result.object.name}}</p>
+							</div>
+						</a>
+					</div>
+				
+				
+				{% elif result.type == 'Graduate' %}
+				<div class="result" id="people">
+					<img src="{{result.object.photo.url}}">
+					<div class="info">
+						<p id="name">{{result.object.name}}</p>
+						<p id="bio">{{result.object.name}}</p>
+					</div>
+					
+				</div>
 
+				{% elif result.type == 'Company' %}
+				<div class="result" id="companies">
+					<img src="{{result.object.photo.url}}">
+					<div class="info">
+						<p id="name">{{result.object.name}}</p>
+						<p id="industry">{{result.object.name}}</p>
+						<p id="bio">{{result.object.name}}</p>
+					</div>
+					
+					
+				</div>
+
+				{% elif result.type == 'Post' %}
+				<div class="result" id="posts">
+
+					<div class="info">
+						<p id="name">{{result.object.title}}</p>
+						<p id="bio">{{result.object.content}}</p>
+					</div>
+					
+				</div>
+				{% endif %}
+				
+			{% endfor %}
+			{% else %}
+				<div class="no-results">
+					<i class="material-icons" style="font-size:48px;color:red">warning</i>
+					<h3>We couldn't find a match for "{{searched}}"</h3>
+					
+				</div>
+			{% endif %}
 		</div>
 	</div>
 
