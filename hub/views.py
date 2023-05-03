@@ -4,13 +4,10 @@ from django.http import JsonResponse
 from datetime import datetime, time
 import json
 from django.contrib.auth.decorators import login_required
-<<<<<<< HEAD
 from django.db.models import Count
 from itertools import chain
 
-=======
 from django.db.models import Count, Q
->>>>>>> c4f2c71e6f97c9ceb440fa0422b140e2bd10f773
 
 
 # Create your views here.
