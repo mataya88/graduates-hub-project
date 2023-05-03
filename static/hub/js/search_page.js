@@ -34,7 +34,6 @@
 		const results = document.querySelectorAll(".result");
 
 		
-		//const filterInput = document.querySelector('input[name="filter"]');
 
 		options.forEach(function(option) {
 		option.addEventListener("click", function(e) {
@@ -62,10 +61,13 @@
 		// get search submit button
 		const searchButton = document.querySelector(".submit-button");
 		const searchForm = document.getElementById('search-form');
+		const noResultsMsg = document.querySelector(".no-results");
 
 		searchButton.addEventListener("click", function(e){
 			e.preventDefault();
+
 			searchForm.submit();
+
 
 		});
 		

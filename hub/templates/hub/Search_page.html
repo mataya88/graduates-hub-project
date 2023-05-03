@@ -17,7 +17,7 @@
 			<h1>Graduates Hub</h1>
 			<p>Where career dreams come true</p>
 		</div>
-		<a href="/logout/"><button class="logout-button"> Logout </button></a>
+		<a href="/logout/"><button class="logout-button"> Logout <ion-icon name="log-out-outline"></ion-icon></button></a>
 	</header>
 
 	<div class="container">
@@ -31,7 +31,6 @@
 				<i class="fa fa-search" style="font-size:24px; color:black"></i>
 			</button>
 
-			<!--<input type="hidden" name="filter" value="All">-->
 			
 		  </form>
 	</div>
@@ -42,10 +41,9 @@
 		<div class="display-query">
 			{% if searched %}
 			<h2>Search results for {{searched}}</h2>
-
-			{% else %}
-			<h2>Hey! You Forgot To Search...</h2>
-			{%endif %}
+			
+			{%endif %} 
+				
 		</div>
 		
 		<div class="sort">
@@ -78,7 +76,7 @@
 		  </div>
 		  
 		<div class="search-results">
-			{% if results %}
+			
 			{% for result in results %}
 				{% if result.type == 'Student'%}
 				
@@ -87,7 +85,7 @@
 							<img src="{{result.object.photo.url}}">
 							<div class="info">
 								<p id="name">{{result.object.name}}</p>
-								<p id="bio">{{result.object.name}}</p>
+								<p id="bio">{{result.object.bio}}</p>
 							</div>
 						</a>
 					</div>
@@ -98,7 +96,7 @@
 					<img src="{{result.object.photo.url}}">
 					<div class="info">
 						<p id="name">{{result.object.name}}</p>
-						<p id="bio">{{result.object.name}}</p>
+						<p id="bio">{{result.object.bio}}</p>
 					</div>
 					
 				</div>
@@ -108,8 +106,8 @@
 					<img src="{{result.object.photo.url}}">
 					<div class="info">
 						<p id="name">{{result.object.name}}</p>
-						<p id="industry">{{result.object.name}}</p>
-						<p id="bio">{{result.object.name}}</p>
+						<p id="industry">{{result.object.industry}}</p>
+						<p id="bio">{{result.object.bio}}</p>
 					</div>
 					
 					
@@ -127,13 +125,13 @@
 				{% endif %}
 				
 			{% endfor %}
-			{% else %}
-				<div class="no-results">
-					<i class="material-icons" style="font-size:48px;color:red">warning</i>
-					<h3>We couldn't find a match for "{{searched}}"</h3>
-					
-				</div>
-			{% endif %}
+
+			<div class="no-results">
+				<i class="material-icons" style="font-size:48px;color:red">warning</i>
+				<h3>We couldn't find a match for "{{searched}}"</h3>
+				
+			</div>
+
 		</div>
 	</div>
 
@@ -142,5 +140,6 @@
 	<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 	<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 	<script src="{% static 'hub/js/search_page.js' %}"></script>
+
 </body>
 </html>

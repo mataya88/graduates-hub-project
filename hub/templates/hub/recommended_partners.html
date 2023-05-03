@@ -18,7 +18,8 @@
 			<h1>GRADUATES HUB</h1>
 			<p>"Where career dream comes true"</p>
 		</div>
-		<a href="/logout/"><button class="logout-button"> Logout </button></a>
+		
+		<a href="/logout/"><button class="logout-button"> Logout <ion-icon name="log-out-outline"></ion-icon></button></a>
 		<a href="/hub/student-profile/{{user.profile.id}}">
 		<img src="{{user.profile.photo.url}}" class="head-profile" width="60px" height="60px">
 		</a>
@@ -60,5 +61,7 @@
 	  });
 	});
 	</script>
+	<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+
 </body>
 </html>

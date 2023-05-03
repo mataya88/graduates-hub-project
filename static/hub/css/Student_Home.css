@@ -17,7 +17,8 @@ header {
 }
 
 .head-profile {
-    margin: 15px;
+  margin: 20px;
+  border-radius: 25px;
 }
 
 
@@ -439,3 +440,32 @@ header {
      .timeline > .meetings-head {
       margin-left: 350px;
     }
+
+    header a {
+      text-decoration: none;
+  }
+    .logout-button{
+      margin-top: 10px;
+      display: flex;
+      align-items: center;  
+      justify-content: center;
+      cursor: pointer;
+      width: 95px;
+      height: 35px;
+      border: none;
+      background-color: lightgrey;
+      border-radius: 5px;
+      font-weight: 600;
+  
+  }
+  
+  .logout-button:hover{
+      background-color: #a9a9a9;
+  
+  }
+  
+  .logout-button ion-icon{
+      font-size: 17px;
+      color: blue;
+      margin-left: 5px;
+  }

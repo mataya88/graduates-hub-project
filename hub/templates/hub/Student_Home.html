@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Graduates Hub</title>
     <link rel="stylesheet" type="text/css" href="{% static 'hub/css/Student_Home.css' %}">
+	
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js">
 	</script>
 </head>
@@ -20,10 +21,10 @@
 			<h1 style="margin-left: 35%;">Graduates Hub</h1>
 			<p style="margin-left: 35%;">"Where career dream comes true"</p>
 		</div>
-		<a href="/logout/"><button class="logout-button"> Logout </button></a>
+		<a href="/logout/"><button class="logout-button"> Logout <ion-icon name="log-out-outline"></button></a>
 		<a href="/hub/student-profile/{{user.profile.id}}">
 			<img src="{{user.profile.photo.url}}" class="head-profile" width="60px" height="60px">
-			</a>        
+		</a>        
 	</header>
 	<div class="topnav">
 		<a class="active" href="{% url 'student-home' %}" id="Home">Home
@@ -217,6 +218,8 @@
 
 
   </script>
+  	<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+
   
 </body>
 </html>
