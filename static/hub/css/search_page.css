@@ -362,7 +362,7 @@ input{
 }
 
 .logout-button{
-    margin-top: 10px;
+    margin-top: 0px;
     display: flex;
     align-items: center;  
     justify-content: center;

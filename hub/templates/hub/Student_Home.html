@@ -27,24 +27,26 @@
 		</a>        
 	</header>
 	<div class="topnav">
-		<a class="active" href="{% url 'student-home' %}" id="Home">Home
-		<a class="active" href="#MyTeam" id="myButton">My Team
+		<a  href="{% url 'student-home' %}" id="Home">Home
+		<a  href="#MyTeam" id="myButton">My Team
 			<script>
 			  // Add click event listener to the main button
 			  document.getElementById("myButton").addEventListener("click", function(e) {
 				e.preventDefault();
+				document.getElementById("myButton").classList.toggle("active")
 				// Toggle the display property of the additional buttons container
 				var additionalButtons = document.querySelector(".additional-buttons");
 				additionalButtons.style.display = additionalButtons.style.display === "flex" ? "none" : "flex";
 			  });
 			</script>
-		<a class="active" href="#Schedule" id="myButton1">Schedule
+		<a  href="#Schedule" id="myButton1">Schedule
 			
 		  
 			<script>
 			  // Add click event listener to the main button
 			  document.getElementById("myButton1").addEventListener("click", function(e) {
 				e.preventDefault();
+				document.getElementById("myButton1").classList.toggle("active")
 				// Toggle the display property of the additional buttons container
 				var additionalButtons = document.querySelector(".additional-buttons1");
 				additionalButtons.style.display = additionalButtons.style.display === "flex" ? "none" : "flex";
@@ -64,7 +66,6 @@
 
 			
 		</form>
-		<!--<a href="{% url 'search-page' %}">Search</a> -->	
 		
 	  <div class="notifications-dropdown">
 		<button onclick="myFunction()" class="notifications-dropbtn">Notifications</button>
@@ -99,7 +100,7 @@
 		<a href="#"><button>Create/Edit Post</button></a>
 	  </div>
 	  <div class="additional-buttons1">
-		<a href="{% url 'calendar' %}"><button>calendar</button></a>
+		<a href="{% url 'calendar' %}"><button>Calendar</button></a>
 		<a href="{% url 'new-meeting' %}"><button>Schedule a meeting</button></a>
 		<a href="{% url 'edit-courses' %}"><button>Edit Weekly hours</button></a>
 	  </div>
@@ -184,7 +185,7 @@
 <div class="main-content-container">
 	<div class="group-mem-block">
 		{% if members %}
-		<u><h1>My Team Members:</h1></u>
+		<u><h1>My Team Members</h1></u>
 		{% for member in members %}
 		<img src="{{member.photo.url}}"alt="Icon 5">
 		<a href="/hub/student-profile/{{member.id}}"><h2>{{member.name}}</h2></a>
@@ -214,6 +215,9 @@
 		if (!dropdownBtn.contains(e.target) && !dropdownContent.contains(e.target)) {
 			// If the target is outside the dropdown, hide the dropdown content
 			dropdownContent.style.display = "none";
+			if (dropdownBtn.classList.contains('active')) {
+				dropdownBtn.classList.remove('active');
+			  }
 		}
 		});
 
@@ -226,6 +230,10 @@
 		if (!dropdownBtn2.contains(e.target) && !dropdownContent2.contains(e.target)) {
 			// If the target is outside the dropdown, hide the dropdown content
 			dropdownContent2.style.display = "none";
+			if (dropdownBtn2.classList.contains('active')) {
+				dropdownBtn2.classList.remove('active');
+			  }
+			
 		}
 		});
 
