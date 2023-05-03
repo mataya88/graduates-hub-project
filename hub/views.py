@@ -4,6 +4,9 @@ from django.http import JsonResponse
 from datetime import datetime, time
 import json
 from django.contrib.auth.decorators import login_required
+from django.db.models import Count
+from itertools import chain
+
 from django.db.models import Count, Q
 
 
@@ -54,7 +57,7 @@ def get_schedule_meeting_page(request):
         meeting.members_available.add(*members_available_obj)
 
         # Return a response to the user
-        return redirect('calendar')
+        return redirect('student-home')
 
     meetingsObj = Meeting.objects.filter(team=team).prefetch_related('members_available')
 
@@ -164,7 +167,7 @@ def submit_courses(request):
         student.occupancies.set(occupancies_obj)
 
         # Return a response to the user
-        return redirect('calendar')
+        return redirect('student-home')
 
     # If this is a GET request, render the form HTML template
     return render(request, 'hub/weekly_courses.html')
@@ -179,6 +182,41 @@ def get_project(request):
 
 
 def get_search(request):
+    if request.method == "POST":
+  
+        searched = request.POST['searched']
+        result_list = []
+        if searched:
+            user_results = User.objects.filter(name__contains=searched)
+            posts_results = Post.objects.filter(title__contains=searched, visibility='Pub')
+
+    
+            results = list(chain(user_results, posts_results))
+
+            print(results)
+            for result in results:
+                if hasattr(result, 'student'):
+                    student = Student.objects.get(pk=result.pk)
+                    results[results.index(result)] = student
+                    print(student)
+                if hasattr(result, 'graduate'):
+                    graduate = Graduate.objects.get(pk=result.pk)
+                    results[results.index(result)] = graduate
+                    print(graduate)
+                if hasattr(result, 'company'):
+                    company = Company.objects.get(pk=result.pk)
+                    results[results.index(result)] = company
+                    print(company)
+            
+
+            print(results)
+            result_list = [{'type': type(obj).__name__, 'object': obj} for obj in results]
+            print(result_list)
+
+            
+
+        return render(request, 'hub/search_page.html', {'searched': searched, 'results': result_list})
+
     return render(request, 'hub/search_page.html')
 
 

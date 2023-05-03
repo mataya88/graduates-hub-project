@@ -24,8 +24,12 @@ header {
     
 }
 .head-profile {
-  margin: 15px;
-}
+  margin: 20px;
+  border-radius: 27px;
+  border-style: solid;
+  border-width: 4px;
+  border-color: white;
+  outline: 1px solid #777;}
 
 .bar h2 {
     color: white;
@@ -394,26 +398,7 @@ header {
   .meeting-info-input #name:focus {
     outline: none;
   }
-  /*
-  .meeting-info-input #description {
-    text-align: top;
-    resize: none;
-    vertical-align: top;
-    width: 100%;
-    height: 120px;
-    padding: 5px;
-    box-sizing: border-box;
-    font-size: 16px;
-    line-height: 1.5;
-    margin-top: 5px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    word-wrap: break-word;
-    word-break: break-all;
 
-  }
-  */
   .meeting-info-input textarea {
     width: 100%;
     height: 100px;
@@ -474,3 +459,32 @@ header {
     align-items: center;
     display: none;
   }
+  .logout-button{
+    margin-top: 0px;
+    display: flex;
+    align-items: center;  
+    justify-content: center;
+    cursor: pointer;
+    width: 95px;
+    height: 35px;
+    border: none;
+    background-color: lightgrey;
+    border-radius: 5px;
+    font-weight: 600;
+
+}
+
+header a{
+  text-decoration: none;
+}
+
+.logout-button:hover{
+    background-color: #a9a9a9;
+
+}
+
+.logout-button ion-icon{
+    font-size: 17px;
+    color: blue;
+    margin-left: 5px;
+}

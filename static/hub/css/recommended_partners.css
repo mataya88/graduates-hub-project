@@ -17,7 +17,8 @@ header {
 }
 
 .head-profile {
-    margin: 15px;
+    margin: 20px;
+    border-radius: 25px;
 }
 .bar {
     background-color: grey;
@@ -67,17 +68,61 @@ table {
 .table-button-red {
     border: 0;
     color: red;
-    
+    cursor: pointer;
+    background-color: rgb(245, 245, 245);
 }
 
 /* CSS for Green Button */
 .table-button-green {
     border: 0;
     color: rgb(0, 255, 64);
-    
+    cursor: pointer;
+    background-color: rgb(245, 245, 245);
 }
 
 table th,td {
     padding: 20px;
 }
 
+#student_name button{
+    cursor: pointer;
+    width: 100px;
+    height: 35px;
+    border: none;
+    background-color: lightgrey;
+    border-radius: 5px;
+}
+#student_name button:hover{
+    background-color: #a9a9a9;
+
+}
+
+header a {
+    text-decoration: none;
+}
+
+.logout-button{
+    margin-top: 0px;
+    display: flex;
+    align-items: center;  
+    justify-content: center;
+    cursor: pointer;
+    width: 95px;
+    height: 35px;
+    border: none;
+    background-color: lightgrey;
+    border-radius: 5px;
+    font-weight: 600;
+
+}
+
+.logout-button:hover{
+    background-color: #a9a9a9;
+
+}
+
+.logout-button ion-icon{
+    font-size: 17px;
+    color: blue;
+    margin-left: 5px;
+}
