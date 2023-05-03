@@ -4,9 +4,13 @@ from django.http import JsonResponse
 from datetime import datetime, time
 import json
 from django.contrib.auth.decorators import login_required
+<<<<<<< HEAD
 from django.db.models import Count
 from itertools import chain
 
+=======
+from django.db.models import Count, Q
+>>>>>>> c4f2c71e6f97c9ceb440fa0422b140e2bd10f773
 
 
 # Create your views here.
@@ -58,7 +62,7 @@ def get_schedule_meeting_page(request):
         # Return a response to the user
         return redirect('student-home')
 
-    meetingsObj = Meeting.objects.filter(team=team)
+    meetingsObj = Meeting.objects.filter(team=team).prefetch_related('members_available')
 
     meetings = []
     for meeting in meetingsObj:
@@ -219,9 +223,6 @@ def get_search(request):
     return render(request, 'hub/search_page.html')
 
 
-def handle_sponsorship():
-    result = [{'name': 'ahmad', 'phone': '35353', '': ''}]
-
 # Returns Student Home page
 
 
@@ -232,9 +233,14 @@ def get_student_home(request):
             id=request.user.profile.id)
     else:
         team_members = []
-    posts = Post.objects.all().order_by('-time')
+
+    notifications = Notification.objects.filter(
+        receiver=request.user.profile, status="S").prefetch_related('sender')
+    posts = Post.objects.filter(visibility="Pub").select_related(
+        'creator').order_by('-time')
     meetings = Meeting.objects.all().order_by('-date')
-    context = {'Posts': posts, 'Meetings': meetings, 'members': team_members}
+    context = {'Posts': posts, 'Meetings': meetings,
+               'members': team_members, 'notifications': notifications}
     return render(request, 'hub/Student_Home.html', context)
 
 # Returns Recommended Partners (Students) page
@@ -253,12 +259,13 @@ def get_recommended_partners(request):
 
     # students that have more skills in other fields will have more prioriy
     recommended_students = (Student.objects
+                            .exclude(name=student.name)
+                            .exclude(Q(team=student.team) & ~ Q(team__isnull=True))
                             .filter(
                                 personality__in=student.COMPATIBILITY_MATRIX[student.personality])
-                            .exclude(name=student.name)
-                            .exclude(team=student.team)
                             .filter(skills__field__in=missed_skill_fields)
                             .annotate(priority=Count('skills'))
+                            .select_related('design_semester')
                             .order_by('-priority'))
     print(recommended_students)
 
@@ -295,3 +302,75 @@ def get_advisor_home(request):
 def get_company_home(request):
     Posts = Post.objects.all()
     return render(request, 'hub/company_home.html', {'Posts': Posts})
+
+
+@login_required
+def post_team_request(request):
+    if request.method == 'POST':
+
+        requested_student = Student.objects.get(
+            id=request.POST['requested_student_id'])
+        user_profile = request.user.profile
+
+        if requested_student.team and not user_profile.team:
+            request_notification = Notification(
+                title="Team Join Request", description=f"{user_profile.name} wants to join your team.", sender=user_profile, receiver=requested_student, status="S", links=" ")
+        elif not requested_student.team and user_profile.team:
+            pronoun = 'his'
+            if user_profile.gender == "F":
+                pronoun = 'her'
+
+            request_notification = Notification(
+                title="Team Join Invite", description=f"{user_profile.name} wants you to join {pronoun} team.", sender=user_profile, receiver=requested_student, status="S", links=" ")
+
+        elif not requested_student.team and not user_profile.team:
+            request_notification = Notification(
+                title="Team Request", description=f"{user_profile.name} wants to create a team with you.", sender=user_profile, receiver=requested_student, status="S", links=" ")
+        else:
+            failed = "There was a problem in sending the request."
+            return HttpResponse(failed, status=400)
+
+        request_notification.save()
+
+        success = "Team request sent successfully"
+        return HttpResponse(success)
+
+
+@login_required
+def accept_team_request(request):
+    if request.method == "POST":
+        request_sender = Student.objects.get(id=request.POST['request_sender'])
+        request_receiver = request.user.profile
+        notification = Notification.objects.get(
+            id=request.POST['notification'])
+        if request_sender.team and not request_receiver.team:
+            request_sender.team.student_set.add(request_receiver)
+            notification.status = "R"
+            notification.save()
+        elif not request_sender.team and request_receiver.team:
+            request_receiver.team.student_set.add(request_sender)
+            notification.status = "R"
+            notification.save()
+        elif not request_sender.team and not request_receiver.team:
+            new_team = Team(name="Design Team")
+            new_team.save()
+            new_team.student_set.add(request_receiver)
+            new_team.student_set.add(request_sender)
+            notification.status = "R"
+            notification.save()
+        else:
+            error = "Request could not be accepted"
+            return HttpResponse(error, status=400)
+
+        success = "Request accepted successfully"
+        return HttpResponse(success)
+
+
+@login_required
+def dismiss_notification(request):
+    if request.method == "POST":
+        notification = Notification.objects.get(
+            id=request.POST['notification'])
+        notification.status = "D"
+        notification.save()
+        return HttpResponse()

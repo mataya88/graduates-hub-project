@@ -357,8 +357,85 @@ header {
        background-color: silver;
        transition: 0.3s ease;
      }
+
+     .notifications-dropbtn {
+      background-color: gray;
+      color: white;
+      padding: 16px;
+      font-size: 16px;
+      border: none;
+      cursor: pointer;
+    }
+    
+    .notifications-dropbtn:hover, .notifications-dropbtn:focus {
+      background-color: #ffffff;
+      color: black;
+      transition: 0.3s ease;
+    }
+    
+    .notifications-dropdown {
+      float: right;
+      position: relative;
+      display: inline-block;
+    }
+    
+    .notifications-content {
+      border: solid 1px black;
+      border-radius: 5px;
+      display: none;
+      position: absolute;
+      padding: 20px;
+      background-color: #f1f1f1;
+      min-width: 160px;
+      overflow: auto;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      right: 0;
+      z-index: 1;
+    }
+    
+    .notifications-content a {
+      color: black;
+      
+      text-decoration: none;
+      display: block;
+    }
+
+    .notifications-content a:hover {
+      background-color: silver;
+       transition: 0.3s ease;
+    }
+    
+    .notifications-dropdown a:hover {background-color: #ddd;}
+
+    .notifications-content button {
+      padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: #ffffff;
+    cursor: pointer;
+    }
+    .notification-item {
+      border-bottom: solid 1px black;
+      padding-bottom: 15px;
+    }
+
+
+    .notifications-content :last-child {
+      border-bottom: none;
+    }
+    .notification-item p {
+      width: 30vw;
+    }
+    .notification-buttons {
+      display: flex;
+      flex-direction: row;
+    }
+    .notification-buttons form {
+      margin-right: 10px;
+    }
+    .show-notifications {display: block;}
  
      .timeline > .meetings-head {
       margin-left: 350px;
     }
- 

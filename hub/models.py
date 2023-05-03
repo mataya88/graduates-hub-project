@@ -31,7 +31,7 @@ class User(models.Model):
 
 
 class Notification(models.Model):
-    STATUSES = [('R', 'Received'), ('S', 'Seen'), ('D', 'Dismissed')]
+    STATUSES = [('R', 'Received'), ('S', 'Sent'), ('D', 'Dismissed')]
     title = models.CharField(max_length=30)
     description = models.TextField()
     links = models.TextField()
