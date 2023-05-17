@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,39 +7,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         body {
-            background-color: #344a72;
+          background-color: #FAF9F6;
+            height: 600px;
             font-family: "Roboto", sans-serif;
+            background: linear-gradient(to top, rgba(6, 3, 12, 0.1)0%, rgba(16, 14, 136, 0.1)0%), url("/static/hub/img/background7.png");
+            background-size: cover;
           }
           
+          .sign-up{
+            margin-top: 100px;
+            display: flex;
+            align-items: center;
+          }
           .signup-box {
-            width: 360px;
-            height: 620px;
-            margin: auto;
-            background-color: white;
+            clear: left;
+            height: fit-content;
+            float: right;
             border-radius: 3px;
+            display: flex;
           }
-          
-          .login-box {
-            width: 360px;
-            height: 280px;
-            margin: auto;
-            border-radius: 3px;
-            background-color: white;
-          
-          }
-          
-          h1 {
-            text-align: center;
-            color: #fff;
-            display: block;
-            font-family:'Courier New', Courier, monospace;
-            background-color: rgb(37, 131, 141);
-          }
-          
-          h4 {
-            text-align: center;
-          }
-          
+
+   
+          /*
           form {
             width: 300px;
             margin-left: 20px;
@@ -80,14 +70,106 @@
           }
           .para-2 a {
             color: #49c1a2;
-          }
+          } */
           
+          form{
+
+            width: 250px;
+
+            background: linear-gradient(to top, rgba(0,0,0,0.8)50%,rgba(0,0,0,0.8)50% );
+
+            border-radius: 10px;
+            padding: 25px;
+            }
+
+            form h2 {
+            width: 220px;
+            font-family: sans-serif;
+            text-align: center;
+            color: grey;
+            font-size: 22px;
+            background-color: white ;
+            border-radius: 10px;
+            margin: 2px;
+            padding: 8px;
+            }
+            form input {
+            width: 240px;
+            height: 35px;
+            background: transparent;
+            border-bottom: 1px solid blue;
+            border-top: none;
+            border-left: none;
+            border-right: none;
+            color: white; 
+            font-size: 15px;
+            letter-spacing: 1px;
+            margin-top: 30px ;
+            font-family: sans-serif;
+            }
+            form input:-webkit-autofill {
+            -webkit-text-fill-color: white;
+            -webkit-box-shadow: 0 0 0px 1000px transparent inset !important;
+            box-shadow: 0 0 0px 1000px transparent inset !important;
+            transition: background-color 5000s ease-in-out 0s;
+
+            }
+
+            form input:focus{
+            outline: none;    
+
+            }
+
+            ::placeholder {
+            color: white;
+            font-family: Arial, Helvetica, sans-serif;
+            }
+
+            form .btnn {
+            width: 240px;
+            height: 40px;
+            background-color: #0066b2;
+            border: none;
+            margin-top: 30px;
+            font-size: 18px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.4s ease;
+            color: black;
+            } 
+
+            .btnn:hover{
+            background-color: white;
+
+            }
+
+            form .link {
+            color: white;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 17px;
+            margin-top: 20px ;
+            text-align: center;
+            }
+
+            form .link a{
+            text-decoration: none;
+            color: #0066b2;
+            }
+
+            img{
+            float: left;
+            height: 300px;
+            width: 350px;
+            filter: brightness(80%);
+            margin-right: 500px;
+            margin-left: 100px;
+
+            }
+
         </style>
     <title>Register</title>
 </head>
 <body>
-    <h1>Register</h1>
-    <br></br>
     <div class="container">
     {% if messages %}
         {% for message in messages %}
@@ -98,6 +180,36 @@
         {% endfor %}
     {% endif %}
     </div>
+    <div class="sign-up">
+      <img src="{% static 'hub/img/GraduatesHubLogo.png' %}">
+    
+      <div class="signup-box">
+
+          <form class="form" action="" method="POST">
+            {% csrf_token %}
+            <h2>Sign up</h2>
+            <input type="email" name="email"  class="form-control" placeholder="Enter Your Email" aria-describedby="emailHelp">
+            <input type="text" name="name"  class="form-control" placeholder="Enter Your Name" aria-describedby="emailHelp">
+            <input type="text" name="username"  class="form-control" placeholder="Enter a Username" aria-describedby="emailHelp">
+            <input type="password" class="form-control" name="password" placeholder="Enter a Password">
+            <input class="btnn" type="submit" value="Submit"></input>
+
+            <p class="link">Already have an account?<br>
+              <a href="{% url 'login' %}"> Login</a> here</p>
+          
+            <!--
+            <div class="icons">
+                <a href="#"><ion-icon name="logo-facebook"></ion-icon></a>
+                <a href="#"><ion-icon name="logo-instagram"></ion-icon></a>
+                <a href="#"><ion-icon name="logo-twitter"></ion-icon></a>
+                <a href="#"><ion-icon name="logo-google"></ion-icon></a>
+                <a href="#"><ion-icon name="logo-skype"></ion-icon></a>
+            </div>
+            -->
+          </form>
+      </div>
+    </div>
+    <!--
     <div class="login-box">
         <form action="" method="POST">
             {% csrf_token %}
@@ -119,6 +231,7 @@
         <p class="para-2">
             Already have an account? <a href="{% url 'login' %}">Login</a>
         </p>
+    -->
     
 </body>
 </html>

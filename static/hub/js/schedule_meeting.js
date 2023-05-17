@@ -229,6 +229,8 @@ createButton.addEventListener('click', (event) => {
     parentDiv.getAttribute('data-member4')
     ];
 
+    console.log(dataAttributes)
+
     const formInput = document.querySelector('#meet_data');
     formInput.value = dataAttributes;
 

@@ -16,7 +16,7 @@
 			<h1>Graduates Hub</h1>
 			<p>Where career dreams come true</p>
 		</div>
-		<a href="/logout/"><button class="logout-button"> Logout </button></a>
+		<a href="/login/"><button class="logout-button"> Logout <ion-icon name="log-out-outline"></ion-icon></button></a>
 	</header>
 	<div class = "bar">
         <h2>My Profile</h2>
@@ -29,7 +29,7 @@
 			<img src="{{ user.profile.photo.url}}" alt="Profile Photo">
 		</div>
 		<div class="fields">
-            <button>Edit Profile</button>
+            <button class="blue-button">Edit Profile</button>
             <div class="fields-info">
 			<div class="left">
 				<p>Skills: 
@@ -105,5 +105,7 @@
         </div>
 		</div>
 	</main>
+	<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+
 </body>
 </html>

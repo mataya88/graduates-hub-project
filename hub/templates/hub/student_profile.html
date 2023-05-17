@@ -18,7 +18,7 @@
 			<h1>Graduates Hub</h1>
 			<p>Where career dreams come true</p>
 		</div>
-		<a href="/logout/"><button class="logout-button"> Logout </button></a>
+		<a href="/login/"><button class="logout-button"> Logout </button></a>
 	</header>
 	<div class = "bar">
         <h2>Student Profile</h2>
@@ -36,7 +36,7 @@
 				{% csrf_token %}
 			<input style="display:none;" readonly="readonly" class="form-control" id="student-id" placeholder="student-id" value="{{student.id}}"/>
 			
-			<button type='submit' id="team-request-button">
+			<button class='blue-button' type='submit' id="team-request-button">
 			{% if team and not user.profile.team %}
             Request to join team
 			{% elif not team and user.profile.team %}
