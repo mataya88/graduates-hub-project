@@ -277,6 +277,10 @@ input{
     cursor: pointer;
 }
 
+.result a{
+    width: 100%;
+}
+
 .result:hover{
     background-color: #e5e5e5;
     transition: 0.3s ease;

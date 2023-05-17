@@ -310,7 +310,7 @@ header {
      
          float: left;
          display: block;
-         color: gray;
+         color: black;
          text-align: center;
          width: 200px;
          height: 50px;
@@ -325,7 +325,7 @@ header {
      }
      .additional-buttons button:hover{
        background-color: silver;
-       transition: 0.3s ease;
+       transition: 0.2s ease;
      }
  
  
@@ -348,7 +348,7 @@ header {
      .additional-buttons1 button {
         float: left;
          display: block;
-         color: gray;
+         color: black;
          text-align: center;
          width: 200px;
          height: 50px;
@@ -361,7 +361,7 @@ header {
  
      .additional-buttons1 button:hover{
        background-color: silver;
-       transition: 0.3s ease;
+       transition: 0.2s ease;
      }
 
      .notifications-dropbtn {
